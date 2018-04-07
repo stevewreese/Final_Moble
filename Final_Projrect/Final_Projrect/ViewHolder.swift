@@ -11,9 +11,13 @@ import Foundation
 
 class ViewHolder: UIView
 {
+    
+    var theGame: GameView = GameView(frame: UIScreen.main.bounds)
     override init(frame: CGRect)
     {
         super.init(frame: frame)
+        theGame.backgroundColor = UIColor.white
+        self.addSubview(theGame)
     }
     
     required init?(coder aDecoder: NSCoder) {
