@@ -12,7 +12,10 @@ class GameView: UIView{
     
     var runGame = true;
     var ship = playerShip(frame: CGRect(x: Int(UIScreen.main.bounds.width/2), y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50) )
-    //let left = UIButton(frame: CGRect(x: 0, y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50))
+    let left = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50))
+    let right = UIButton(frame: CGRect(x: 350, y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50))
+    let up = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 150), width: 50, height: 50))
+    let down = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 50), width: 50, height: 50))
     var board = UIView(frame: CGRect(x: 0, y: 0, width: 414, height: 736))
     var initX = 0
     var finalX = 0
@@ -24,12 +27,37 @@ class GameView: UIView{
         self.addSubview(ship)
         self.addSubview(board)
         
-        /*left.backgroundColor = UIColor(white: 1, alpha: 0)
+        left.backgroundColor = UIColor(white: 1, alpha: 0)
         left.setTitleColor(.black, for: .normal)
         left.setTitle("<", for: .normal)
-        left.addTarget(self, action: #selector(GameView.moveLeft(sender:)), for: .touchUpInside)
+        left.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
+        left.addTarget(self, action: #selector(GameView.moveLeft(sender:)), for: .touchDown)
         
-        self.addSubview(left)*/
+        self.addSubview(left)
+        
+        right.backgroundColor = UIColor(white: 1, alpha: 0)
+        right.setTitleColor(.black, for: .normal)
+        right.setTitle(">", for: .normal)
+        right.addTarget(self, action: #selector(GameView.moveRight(sender:)), for: .touchDown)
+        right.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
+        
+        self.addSubview(right)
+        
+        up.backgroundColor = UIColor(white: 1, alpha: 0)
+        up.setTitleColor(.black, for: .normal)
+        up.setTitle("up", for: .normal)
+        up.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
+        up.addTarget(self, action: #selector(GameView.moveUp(sender:)), for: .touchDown)
+        
+        self.addSubview(up)
+        
+        down.backgroundColor = UIColor(white: 1, alpha: 0)
+        down.setTitleColor(.black, for: .normal)
+        down.setTitle("down", for: .normal)
+        down.addTarget(self, action: #selector(GameView.moveDown(sender:)), for: .touchDown)
+        down.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
+        
+        self.addSubview(down)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,41 +72,31 @@ class GameView: UIView{
     }
     
     @objc func moveLeft(sender: UIButton!){
-        self.ship.frame.origin.x =  ship.frame.origin.x - 10
+        sender.backgroundColor = UIColor.blue
+        self.ship.frame.origin.x =  ship.frame.origin.x - 1
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        let point: CGPoint = (touches.first?.location(in: board))!
-        initX = Int(point.x)
+    @objc func moveRight(sender: UIButton!){
+        sender.backgroundColor = UIColor.blue
+        self.ship.frame.origin.x =  ship.frame.origin.x + 1
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesMoved(touches, with: event)
-        //get the point of the finger
-        
-        let point: CGPoint = (touches.first?.location(in: board))!
-        finalX = Int(point.x)
-        
-        var moveThisMany:CGFloat = 0
-
-        moveThisMany = CGFloat(finalX - initX)
-
-        
-        /*if(self.ship.frame.origin.x + moveThisMany  <= 10)
-        {
-            self.ship.frame.origin.x = 10
-        }
-        else if(self.ship.frame.origin.x + moveThisMany >= 360)
-        {
-            self.ship.frame.origin.x = 360
-        }
-        else{
-            self.ship.frame.origin.x =  CGFloat(finalX)
-        }*/
-        self.ship.frame.origin.x =  CGFloat(finalX)
-        
+    @objc func moveDown(sender: UIButton!){
+        sender.backgroundColor = UIColor.blue
+        self.ship.frame.origin.y =  ship.frame.origin.y + 1
     }
+    
+    @objc func moveUp(sender: UIButton!){
+        sender.backgroundColor = UIColor.blue
+        self.ship.frame.origin.y =  ship.frame.origin.y - 1
+    }
+    
+    @objc func up(sender: UIButton!){
+        sender.backgroundColor = UIColor(white: 1, alpha: 0)
+
+    }
+    
+ 
     
    /* func drawTriangle(x: Int, y: Int)
     {
