@@ -75,7 +75,7 @@ class GameView: UIView{
         
         fire.backgroundColor = UIColor(white: 1, alpha: 0)
         fire.setTitleColor(.black, for: .normal)
-        fire.setTitle("down", for: .normal)
+        fire.setTitle("fire", for: .normal)
         fire.addTarget(self, action: #selector(GameView.fireBullet(sender:)), for: .touchDown)
         fire.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
         
