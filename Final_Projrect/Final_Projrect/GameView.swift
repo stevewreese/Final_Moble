@@ -16,7 +16,13 @@ class GameView: UIView{
     let right = UIButton(frame: CGRect(x: 350, y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50))
     let up = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 150), width: 50, height: 50))
     let down = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 50), width: 50, height: 50))
-    var board = UIView(frame: CGRect(x: 0, y: 0, width: 414, height: 736))
+    let fire = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+    
+   
+    var bulletList: Array<UIView> = Array()
+    var fireTheBullet = false
+    var whenToFire = 10
+
     var timer = Timer()
     var movementSpeed = 5
     enum mainShipMove {case stop, left, right, up, down}
@@ -27,12 +33,13 @@ class GameView: UIView{
     var initX = 0
     var finalX = 0
     
+    
+    
     override init(frame: CGRect)
     {
         super.init(frame: frame)
         ship.backgroundColor = UIColor.white
         self.addSubview(ship)
-        self.addSubview(board)
         
         left.backgroundColor = UIColor(white: 1, alpha: 0)
         left.setTitleColor(.black, for: .normal)
@@ -65,6 +72,15 @@ class GameView: UIView{
         down.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
         
         self.addSubview(down)
+        
+        fire.backgroundColor = UIColor(white: 1, alpha: 0)
+        fire.setTitleColor(.black, for: .normal)
+        fire.setTitle("down", for: .normal)
+        fire.addTarget(self, action: #selector(GameView.fireBullet(sender:)), for: .touchDown)
+        fire.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
+        
+        self.addSubview(fire)
+        
         timer = Timer.scheduledTimer(timeInterval: 0.01667, target: self,   selector: (#selector(GameView.update)), userInfo: nil, repeats: true)        //gameLoop()
     }
     
@@ -82,6 +98,42 @@ class GameView: UIView{
     }
     
     @objc func update() {
+        
+        
+        
+        if(fireTheBullet)
+        {
+            if(whenToFire == 10)
+            {
+                var bullet: UIView = UIView(frame: CGRect(x: self.ship.frame.origin.x + 25, y: self.ship.frame.origin.y, width: 2, height: 10))
+                bullet.backgroundColor = UIColor.red
+                bulletList.append(bullet)
+                self.addSubview(bullet)
+                whenToFire = 0
+            }
+            else
+            {
+                whenToFire = whenToFire + 1
+            }
+
+        }
+        else{
+            whenToFire = 10
+        }
+
+        
+        var index = 0
+        
+        for bullet in bulletList
+        {
+            bullet.frame.origin.y = bullet.frame.origin.y - 10
+            if(bullet.frame.origin.y - 10 == UIScreen.main.bounds.height)
+            {
+                bulletList.remove(at: index)
+                bullet.removeFromSuperview()
+            }
+            index = index + 1
+        }
         
         switch(shipMove)
         {
@@ -161,8 +213,22 @@ class GameView: UIView{
     
     @objc func up(sender: UIButton!){
         sender.backgroundColor = UIColor(white: 1, alpha: 0)
-        shipMove = mainShipMove.stop
+        if(sender == fire)
+        {
+            fireTheBullet = false
+        }
+        else{
+            shipMove = mainShipMove.stop
+        }
+        
 
+    }
+    
+    @objc func fireBullet(sender: UIButton!){
+        sender.backgroundColor = theBlue
+        fireTheBullet = true
+
+        
     }
     
  
