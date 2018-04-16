@@ -17,6 +17,12 @@ class GameView: UIView{
     let up = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 150), width: 50, height: 50))
     let down = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 50), width: 50, height: 50))
     var board = UIView(frame: CGRect(x: 0, y: 0, width: 414, height: 736))
+    var timer = Timer()
+    var i = 0
+    enum mainShipMove {case stop, left, right, up, down}
+    var shipMove: mainShipMove = mainShipMove.stop
+    //var displayLink = CADisplayLink(target: self, selector: #selector(update))
+    
     var initX = 0
     var finalX = 0
     
@@ -58,6 +64,7 @@ class GameView: UIView{
         down.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
         
         self.addSubview(down)
+        timer = Timer.scheduledTimer(timeInterval: 0.01667, target: self,   selector: (#selector(GameView.update)), userInfo: nil, repeats: true)        //gameLoop()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,33 +73,94 @@ class GameView: UIView{
     
     
     func gameLoop(){
-        while(runGame){
+        //displayLink.preferredFramesPerSecond = 1
+        //displayLink.add(to: .main, forMode: .commonModes)
+        /*while(runGame){
             
+        }*/
+    }
+    
+    @objc func update() {
+        
+        switch(shipMove)
+        {
+        case .left :
+            if(self.ship.frame.origin.x == 0)
+            {
+                
+            }
+            else{
+                self.ship.frame.origin.x =  ship.frame.origin.x - 1
+            }
+            break
+        case .stop:
+            break
+        case .right:
+            if(self.ship.frame.origin.x == UIScreen.main.bounds.width - 50)
+            {
+                
+            }
+            else{
+                self.ship.frame.origin.x =  ship.frame.origin.x  + 1
+            }
+            break
+        case .up:
+            if(self.ship.frame.origin.y == 0)
+            {
+                
+            }
+            else{
+                self.ship.frame.origin.y =  ship.frame.origin.y - 1
+            }
+            break
+        case .down:
+            if(self.ship.frame.origin.y == UIScreen.main.bounds.height - 50)
+            {
+                
+            }
+            else{
+                self.ship.frame.origin.y =  ship.frame.origin.y + 1
+            }
+            break
         }
     }
     
     @objc func moveLeft(sender: UIButton!){
         sender.backgroundColor = UIColor.blue
-        self.ship.frame.origin.x =  ship.frame.origin.x - 1
+        
+        shipMove = mainShipMove.left
+        
+        
     }
     
     @objc func moveRight(sender: UIButton!){
         sender.backgroundColor = UIColor.blue
-        self.ship.frame.origin.x =  ship.frame.origin.x + 1
+
+        shipMove = mainShipMove.right
+
+        
     }
     
     @objc func moveDown(sender: UIButton!){
+        
+
+        shipMove = mainShipMove.down
         sender.backgroundColor = UIColor.blue
-        self.ship.frame.origin.y =  ship.frame.origin.y + 1
+        
+        
     }
     
     @objc func moveUp(sender: UIButton!){
         sender.backgroundColor = UIColor.blue
-        self.ship.frame.origin.y =  ship.frame.origin.y - 1
+
+        shipMove = mainShipMove.up
+        
+        
     }
     
     @objc func up(sender: UIButton!){
         sender.backgroundColor = UIColor(white: 1, alpha: 0)
+        shipMove = mainShipMove.stop
 
     }
     
