@@ -18,8 +18,9 @@ class GameView: UIView{
     let down = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 50), width: 50, height: 50))
     var board = UIView(frame: CGRect(x: 0, y: 0, width: 414, height: 736))
     var timer = Timer()
-    var i = 0
+    var movementSpeed = 5
     enum mainShipMove {case stop, left, right, up, down}
+    var theBlue = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(1.0), alpha: CGFloat(0.5))
     var shipMove: mainShipMove = mainShipMove.stop
     //var displayLink = CADisplayLink(target: self, selector: #selector(update))
     
@@ -85,48 +86,48 @@ class GameView: UIView{
         switch(shipMove)
         {
         case .left :
-            if(self.ship.frame.origin.x == 0)
+            if(self.ship.frame.origin.x <= 0)
             {
                 
             }
             else{
-                self.ship.frame.origin.x =  ship.frame.origin.x - 1
+                self.ship.frame.origin.x =  ship.frame.origin.x - CGFloat(movementSpeed)
             }
             break
         case .stop:
             break
         case .right:
-            if(self.ship.frame.origin.x == UIScreen.main.bounds.width - 50)
+            if(self.ship.frame.origin.x >= UIScreen.main.bounds.width - 50)
             {
                 
             }
             else{
-                self.ship.frame.origin.x =  ship.frame.origin.x  + 1
+                self.ship.frame.origin.x =  ship.frame.origin.x  + CGFloat(movementSpeed)
             }
             break
         case .up:
-            if(self.ship.frame.origin.y == 0)
+            if(self.ship.frame.origin.y <= 0)
             {
                 
             }
             else{
-                self.ship.frame.origin.y =  ship.frame.origin.y - 1
+                self.ship.frame.origin.y =  ship.frame.origin.y - CGFloat(movementSpeed)
             }
             break
         case .down:
-            if(self.ship.frame.origin.y == UIScreen.main.bounds.height - 50)
+            if(self.ship.frame.origin.y >= UIScreen.main.bounds.height - 50)
             {
                 
             }
             else{
-                self.ship.frame.origin.y =  ship.frame.origin.y + 1
+                self.ship.frame.origin.y =  ship.frame.origin.y + CGFloat(movementSpeed)
             }
             break
         }
     }
     
     @objc func moveLeft(sender: UIButton!){
-        sender.backgroundColor = UIColor.blue
+        sender.backgroundColor = theBlue
         
         shipMove = mainShipMove.left
         
@@ -134,7 +135,7 @@ class GameView: UIView{
     }
     
     @objc func moveRight(sender: UIButton!){
-        sender.backgroundColor = UIColor.blue
+        sender.backgroundColor = theBlue
 
         shipMove = mainShipMove.right
 
@@ -145,13 +146,13 @@ class GameView: UIView{
         
 
         shipMove = mainShipMove.down
-        sender.backgroundColor = UIColor.blue
+        sender.backgroundColor = theBlue
         
         
     }
     
     @objc func moveUp(sender: UIButton!){
-        sender.backgroundColor = UIColor.blue
+        sender.backgroundColor = theBlue
 
         shipMove = mainShipMove.up
         
