@@ -10,12 +10,28 @@ import Foundation
 
 protocol ControlDelegate: class
 {
-    
+    func goToGame()
+    func goToHighScores()
+    func goToMainMenu()
 }
 
 class GameControl
 {
     weak var delegate: ControlDelegate? = nil
     
+    func addGame()
+    {
+        delegate?.goToGame()
+    }
+    
+    func addHigh()
+    {
+        delegate?.goToHighScores()
+    }
+    
+    func addMain()
+    {
+        delegate?.goToMainMenu()
+    }
     
 }

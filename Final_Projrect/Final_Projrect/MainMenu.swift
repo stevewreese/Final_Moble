@@ -10,6 +10,8 @@ import UIKit
 
 class MainMenu:  UIView{
     
+    var theControl: GameControl? = nil
+    
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
     
@@ -34,6 +36,7 @@ class MainMenu:  UIView{
         Resume.setTitle("Resume Game", for: .normal)
         Resume.backgroundColor = .gray
         Resume.setTitleColor(.black, for: .normal)
+        Resume.addTarget(self, action: #selector(MainMenu.GoToGame(sender:)), for: .touchUpInside)
         //NewGame.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
         self.addSubview(Resume)
         
@@ -47,9 +50,11 @@ class MainMenu:  UIView{
     }
     
     @objc func GoToGame(sender: UIButton!) {
+        theControl?.addGame()
 
     }
     @objc func GoToHighScore(sender: UIButton!) {
+        theControl?.addHigh()
 
     }
     

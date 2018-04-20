@@ -10,13 +10,18 @@ import UIKit
 
 class GameView: UIView{
     
+    var theControl: GameControl? = nil
+    
     var runGame = true;
     var ship = playerShip(frame: CGRect(x: Int(UIScreen.main.bounds.width/2), y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50) )
     let left = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50))
     let right = UIButton(frame: CGRect(x: 350, y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50))
     let up = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 150), width: 50, height: 50))
     let down = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 50), width: 50, height: 50))
-    let fire = UIButton(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+    let fire = UIButton(frame: CGRect(x: 0, y: Int(UIScreen.main.bounds.height - 50), width: 50, height: 50))
+    let main = UIButton(frame: CGRect(x: UIScreen.main.bounds.width
+        - 100, y: 15, width: 100, height: 20))
+    let pause = UIButton(frame: CGRect(x: 15, y: 15, width: 100, height: 20))
     
    
     var bulletList: Array<UIView> = Array()
@@ -32,6 +37,10 @@ class GameView: UIView{
     
     var initX = 0
     var finalX = 0
+    
+    var i = 0
+    
+    var running = false
     
     
     
@@ -81,13 +90,38 @@ class GameView: UIView{
         
         self.addSubview(fire)
         
-        timer = Timer.scheduledTimer(timeInterval: 0.01667, target: self,   selector: (#selector(GameView.update)), userInfo: nil, repeats: true)        //gameLoop()
+        
+        main.backgroundColor = .gray
+        main.setTitleColor(.black, for: .normal)
+        main.setTitle("Main Menu", for: .normal)
+        main.addTarget(self, action: #selector(GameView.toMain(sender:)), for: .touchUpInside)
+        
+        self.addSubview(main)
+        
+        pause.backgroundColor = .gray
+        pause.setTitleColor(.black, for: .normal)
+        pause.setTitle("pause", for: .normal)
+        pause.addTarget(self, action: #selector(GameView.pause(sender:)), for: .touchUpInside)
+        
+        self.addSubview(pause)
+        //gameLoop()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func startGame()
+    {
+        timer = Timer.scheduledTimer(timeInterval: 0.01667, target: self,   selector: (#selector(GameView.update)), userInfo: nil, repeats: true)
+        running = true
+    }
+    
+    func stopGame()
+    {
+        timer.invalidate()
+        running = false
+    }
     
     func gameLoop(){
         //displayLink.preferredFramesPerSecond = 1
@@ -98,7 +132,8 @@ class GameView: UIView{
     }
     
     @objc func update() {
-        
+        print("Running... \(i)")
+        i = i + 1
         
         
         if(fireTheBullet)
@@ -228,6 +263,25 @@ class GameView: UIView{
         sender.backgroundColor = theBlue
         fireTheBullet = true
 
+        
+    }
+    
+    @objc func toMain(sender: UIButton!) {
+        theControl?.addMain()
+        stopGame()
+        
+    }
+    
+    @objc func pause(sender: UIButton!) {
+        if(running)
+        {
+            stopGame()
+        }
+        else
+        {
+            startGame()
+        }
+        
         
     }
     

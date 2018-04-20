@@ -12,9 +12,14 @@ class HighScore: UIView, UITableViewDelegate, UITableViewDataSource
 {
     var scoreTable : UITableView!
     
+    var theControl: GameControl? = nil
+    
     //get the sidth and height of phone
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
+    
+    let main = UIButton(frame: CGRect(x: UIScreen.main.bounds.width
+        - 100, y: 15, width: 100, height: 20))
     
     override init(frame: CGRect)
     {
@@ -27,6 +32,13 @@ class HighScore: UIView, UITableViewDelegate, UITableViewDataSource
         scoreTable.delegate = self
         
         addSubview(scoreTable)
+        
+        main.backgroundColor = .gray
+        main.setTitleColor(.black, for: .normal)
+        main.setTitle("Main Menu", for: .normal)
+        main.addTarget(self, action: #selector(HighScore.toMain(sender:)), for: .touchUpInside)
+        
+        self.addSubview(main)
 
     }
     
@@ -50,6 +62,11 @@ class HighScore: UIView, UITableViewDelegate, UITableViewDataSource
 
         return "HIGH SCORES"
 
+    }
+    
+    @objc func toMain(sender: UIButton!) {
+        theControl?.addMain()
+        
     }
     
     
