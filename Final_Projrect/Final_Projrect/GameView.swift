@@ -115,6 +115,7 @@ class GameView: UIView{
     {
         timer = Timer.scheduledTimer(timeInterval: 0.01667, target: self,   selector: (#selector(GameView.update)), userInfo: nil, repeats: true)
         running = true
+        pause.setTitle("pause", for: .normal)
     }
     
     func stopGame()
@@ -276,10 +277,12 @@ class GameView: UIView{
         if(running)
         {
             stopGame()
+            pause.setTitle("start", for: .normal)
         }
         else
         {
             startGame()
+            
         }
         
         
