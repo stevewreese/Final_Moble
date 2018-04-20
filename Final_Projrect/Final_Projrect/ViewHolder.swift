@@ -13,11 +13,15 @@ class ViewHolder: UIView, ControlDelegate
 {
     
     var theGame: GameView = GameView(frame: UIScreen.main.bounds)
+    var theHighScore: HighScore = HighScore(frame: UIScreen.main.bounds)
+    var theMainMenu: MainMenu = MainMenu(frame: UIScreen.main.bounds)
+    
     override init(frame: CGRect)
     {
         super.init(frame: frame)
-        theGame.backgroundColor = UIColor.white
-        self.addSubview(theGame)
+        theMainMenu.backgroundColor = UIColor.white
+        //self.addSubview(theGame)
+        self.addSubview(theMainMenu)
     }
     
     required init?(coder aDecoder: NSCoder) {
