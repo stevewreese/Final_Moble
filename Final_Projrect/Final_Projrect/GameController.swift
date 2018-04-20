@@ -7,3 +7,15 @@
 //
 
 import Foundation
+
+protocol ControlDelegate: class
+{
+    
+}
+
+class GameControl
+{
+    weak var delegate: ControlDelegate? = nil
+    
+    
+}

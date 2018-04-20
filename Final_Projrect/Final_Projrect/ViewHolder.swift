@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class ViewHolder: UIView
+class ViewHolder: UIView, ControlDelegate
 {
     
     var theGame: GameView = GameView(frame: UIScreen.main.bounds)
