@@ -25,6 +25,7 @@ class GameView: UIView{
     
    
     var bulletList: Array<UIView> = Array()
+    var enemyList: Array<UIView> = Array()
     var fireTheBullet = false
     var whenToFire = 10
 
@@ -39,8 +40,11 @@ class GameView: UIView{
     var finalX = 0
     
     var i = 0
+    var shipsSecondCount = 0
     
     var running = false
+    
+    var xplus = 0
     
     
     
@@ -133,8 +137,34 @@ class GameView: UIView{
     }
     
     @objc func update() {
-        print("Running... \(i)")
-        i = i + 1
+        
+        if(shipsSecondCount == 60)
+        {
+            makeNewShip(theX: xplus, theY: -100)
+            xplus = xplus + 50
+            if(xplus == 400)
+            {
+                xplus = 0
+            }
+            shipsSecondCount = 0
+        }
+        else{
+            shipsSecondCount = 1 + shipsSecondCount
+        }
+        var shipIndex = 0
+        for ship in enemyList
+        {
+            ship.frame.origin.y = ship.frame.origin.y + 5
+            
+            if(ship.frame.origin.y + 10 == UIScreen.main.bounds.height)
+            {
+                enemyList.remove(at: shipIndex)
+                ship.removeFromSuperview()
+            }
+            
+            shipIndex = shipIndex + 1
+
+        }
         
         
         if(fireTheBullet)
@@ -163,7 +193,7 @@ class GameView: UIView{
         for bullet in bulletList
         {
             bullet.frame.origin.y = bullet.frame.origin.y - 10
-            if(bullet.frame.origin.y - 10 == UIScreen.main.bounds.height)
+            if(bullet.frame.origin.y - 10 == 0)
             {
                 bulletList.remove(at: index)
                 bullet.removeFromSuperview()
@@ -287,6 +317,16 @@ class GameView: UIView{
         
         
     }
+    
+    func makeNewShip(theX: Int, theY: Int)
+    {
+        var eShip = playerShip(frame: CGRect(x: theX, y: theY, width: 50, height: 50) )
+        eShip.backgroundColor = UIColor.white
+        eShip.backgroundColor = UIColor.blue
+        self.addSubview(eShip)
+        enemyList.append(eShip)
+    }
+    
     
  
     
