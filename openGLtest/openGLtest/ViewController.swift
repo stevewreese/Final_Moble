@@ -6,13 +6,18 @@
 //  Copyright © 2018 u0396206. All rights reserved.
 //
 
-import UIKit
+import GLKit
 
-class ViewController: UIViewController {
+class ViewController: GLKViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let glkView: GLKView = view as! GLKView
+        glkView.context = EAGLContext(api: .openGLES2)!
+        EAGLContext.setCurrent(glkView.context)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
