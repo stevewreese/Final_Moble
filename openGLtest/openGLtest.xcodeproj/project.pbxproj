@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9ACBA7C8208EBBF100B21252 /* mars.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ACBA7C6208EBBF100B21252 /* mars.png */; };
+		9ACBA7CB208EBC0600B21252 /* pluto.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ACBA7CA208EBC0500B21252 /* pluto.png */; };
 		FB24008A208E827F00EA699A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB240089208E827F00EA699A /* AppDelegate.swift */; };
 		FB24008C208E827F00EA699A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB24008B208E827F00EA699A /* ViewController.swift */; };
 		FB240091208E827F00EA699A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB240090208E827F00EA699A /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9ACBA7C6208EBBF100B21252 /* mars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mars.png; sourceTree = "<group>"; };
+		9ACBA7CA208EBC0500B21252 /* pluto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pluto.png; sourceTree = "<group>"; };
 		FB240086208E827F00EA699A /* openGLtest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = openGLtest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB240089208E827F00EA699A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB24008B208E827F00EA699A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,6 +57,8 @@
 				FB240089208E827F00EA699A /* AppDelegate.swift */,
 				FB24008B208E827F00EA699A /* ViewController.swift */,
 				FB240090208E827F00EA699A /* Assets.xcassets */,
+				9ACBA7C6208EBBF100B21252 /* mars.png */,
+				9ACBA7CA208EBC0500B21252 /* pluto.png */,
 				FB240095208E827F00EA699A /* Info.plist */,
 			);
 			path = openGLtest;
@@ -117,7 +123,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9ACBA7C8208EBBF100B21252 /* mars.png in Resources */,
 				FB240091208E827F00EA699A /* Assets.xcassets in Resources */,
+				9ACBA7CB208EBC0600B21252 /* pluto.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
