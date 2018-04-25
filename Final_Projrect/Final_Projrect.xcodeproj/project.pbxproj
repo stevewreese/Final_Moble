@@ -16,6 +16,9 @@
 		9A7E0F2C2076EF5E002EC2C8 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E0F2B2076EF5E002EC2C8 /* MainMenu.swift */; };
 		9A7E0F2E2076EF70002EC2C8 /* HighScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E0F2D2076EF70002EC2C8 /* HighScore.swift */; };
 		9AD59AAC20796F710005BEF4 /* playerShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD59AAB20796F710005BEF4 /* playerShip.swift */; };
+		9AD6E7DB208FFECB006FC075 /* pluto.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD6E7DA208FFECB006FC075 /* pluto.png */; };
+		9AD6E7DD208FFED4006FC075 /* mars.png in Resources */ = {isa = PBXBuildFile; fileRef = 9AD6E7DC208FFED4006FC075 /* mars.png */; };
+		9AD6E7DF208FFEDD006FC075 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6E7DE208FFEDD006FC075 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		9A7E0F2B2076EF5E002EC2C8 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		9A7E0F2D2076EF70002EC2C8 /* HighScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScore.swift; sourceTree = "<group>"; };
 		9AD59AAB20796F710005BEF4 /* playerShip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playerShip.swift; sourceTree = "<group>"; };
+		9AD6E7DA208FFECB006FC075 /* pluto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pluto.png; path = ../../openGLtest/openGLtest/pluto.png; sourceTree = "<group>"; };
+		9AD6E7DC208FFED4006FC075 /* mars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mars.png; path = ../../openGLtest/openGLtest/mars.png; sourceTree = "<group>"; };
+		9AD6E7DE208FFEDD006FC075 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../../openGLtest/openGLtest/ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +78,9 @@
 				9A7E0F2B2076EF5E002EC2C8 /* MainMenu.swift */,
 				9A7E0F2D2076EF70002EC2C8 /* HighScore.swift */,
 				9AD59AAB20796F710005BEF4 /* playerShip.swift */,
+				9AD6E7DE208FFEDD006FC075 /* ViewController.swift */,
+				9AD6E7DC208FFED4006FC075 /* mars.png */,
+				9AD6E7DA208FFECB006FC075 /* pluto.png */,
 			);
 			path = Final_Projrect;
 			sourceTree = "<group>";
@@ -135,7 +144,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9AD6E7DB208FFECB006FC075 /* pluto.png in Resources */,
 				9A7E0F192076E944002EC2C8 /* Assets.xcassets in Resources */,
+				9AD6E7DD208FFED4006FC075 /* mars.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +160,7 @@
 				9A7E0F2A2076EF24002EC2C8 /* GameModel.swift in Sources */,
 				9A7E0F2E2076EF70002EC2C8 /* HighScore.swift in Sources */,
 				9A7E0F2C2076EF5E002EC2C8 /* MainMenu.swift in Sources */,
+				9AD6E7DF208FFEDD006FC075 /* ViewController.swift in Sources */,
 				9A7E0F242076EAC1002EC2C8 /* ViewHolder.swift in Sources */,
 				9AD59AAC20796F710005BEF4 /* playerShip.swift in Sources */,
 				9A7E0F262076EE75002EC2C8 /* GameController.swift in Sources */,

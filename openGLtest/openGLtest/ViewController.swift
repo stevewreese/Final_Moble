@@ -8,11 +8,23 @@
 
 import GLKit
 
-class ViewController: GLKViewController {
+class ViewController: GLKViewController, ControlDelegate{
+    
+    var theControl: GameControl = GameControl()
+    var theGame: GameView = GameView(frame: UIScreen.main.bounds)
+    var theHighScore: HighScore = HighScore(frame: UIScreen.main.bounds)
+    var theMainMenu: MainMenu = MainMenu(frame: UIScreen.main.bounds)
+    
+    enum mainShipMove {case left, right, up, down}
+    var shipMove: mainShipMove = mainShipMove.up
+    
+    var stop = true
+
+    
     let triangleData: [Float] = [
-        +0.80, -0.30,
-        -0.30, +0.70,
-        -0.65, -0.65,
+        +0.0, -0.8,
+        +0.3, -1.0,
+        -0.3, -1.0,
         +0.40, -0.10,
         -0.80, +0.50,
         -0.15, -0.75,
@@ -38,6 +50,17 @@ class ViewController: GLKViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        theControl.delegate = self
+        
+        theGame.theControl = theControl
+        theHighScore.theControl = theControl
+        theMainMenu.theControl = theControl
+        
+        //theHighScore.backgroundColor = .white
+        
+        //theMainMenu.backgroundColor = .white
+
         
         let glkView: GLKView = view as! GLKView
         glkView.context = EAGLContext(api: .openGLES2)!
@@ -113,6 +136,8 @@ class ViewController: GLKViewController {
         
         glClearColor(1.0, 0.0, 0.0, 0.0)
         
+        self.view.addSubview(theMainMenu)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -121,21 +146,96 @@ class ViewController: GLKViewController {
     }
     
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
-        //TODO DRAW A TRIANGLE
-        animationX1 += 0.001
-        animationY1 -= 0.005
-        animationX2 -= 0.002
-        animationY2 += 0.0015
+        if(!stop)
+        {
+            
+            switch(shipMove)
+            {
+            case .left:
+                animationX1 -= 0.01
+                break
+            case .right:
+                animationX1 += 0.01
+                break
+            case .up:
+                if(animationY1 <= 1.8)
+                {
+                    animationY1 += 0.01
+                }
+                break
+            case .down:
+                if(animationY1 >= -0.8){
+                    animationY1 -= 0.01
+                }
+                
+                break
+            }
+                
+            //TODO DRAW A TRIANGLE
+            //animationX1 += 0.001
+
+            
+            //animationX2 -= 0.002
+            //animationY2 += 0.0015
+        }
+            glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+  
+            
+            glBindTexture(GLenum(GL_TEXTURE_2D), marsTextureInfo!.name)
+            glUniform2f(glGetUniformLocation(program, "translate"), animationX1, animationY1)
+            glDrawArrays(GLenum(GL_TRIANGLES), 0, 3)
+            
+            //glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
+            //glUniform2f(glGetUniformLocation(program, "translate"), animationX2, animationY2)
+            //glDrawArrays(GLenum(GL_TRIANGLES), 4, 3)
         
-        glBindTexture(GLenum(GL_TEXTURE_2D), marsTextureInfo!.name)
-        glUniform2f(glGetUniformLocation(program, "translate"), animationX1, animationY1)
-        glDrawArrays(GLenum(GL_TRIANGLES), 0, 3)
-        
-        glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
-        glUniform2f(glGetUniformLocation(program, "translate"), animationX2, animationY2)
-        glDrawArrays(GLenum(GL_TRIANGLES), 4, 3)
+
     }
+    
+    func goToGame() {
+        self.view.addSubview(theGame)
+        theMainMenu.removeFromSuperview()
+        //stop = false
+    }
+    
+    func goToHighScores() {
+        theMainMenu.removeFromSuperview()
+        self.view.addSubview(theHighScore)
+        stop = true
+    }
+    
+    func goToMainMenu() {
+        theGame.removeFromSuperview()
+        theHighScore.removeFromSuperview()
+        self.view.addSubview(theMainMenu)
+        stop = true
+    }
+    
+    func moveUp() {
+        stop = false
+        shipMove = mainShipMove.up
+    }
+    
+    func moveDown() {
+        stop = false
+        shipMove = mainShipMove.down
+    }
+    
+    func moveRight() {
+        stop = false
+        shipMove = mainShipMove.right
+    }
+    
+    func moveLeft() {
+        stop = false
+        shipMove = mainShipMove.left
+    }
+    
+    func stopMove(){
+        stop = true
+    }
+    
+    
 
 
 }

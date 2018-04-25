@@ -29,7 +29,7 @@ class GameView: UIView{
     var fireTheBullet = false
     var whenToFire = 10
 
-    var timer = Timer()
+    //var timer = Timer()
     var movementSpeed = 5
     enum mainShipMove {case stop, left, right, up, down}
     var theBlue = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(1.0), alpha: CGFloat(0.5))
@@ -51,8 +51,8 @@ class GameView: UIView{
     override init(frame: CGRect)
     {
         super.init(frame: frame)
-        ship.backgroundColor = UIColor.white
-        self.addSubview(ship)
+        //ship.backgroundColor = UIColor.white
+        //self.addSubview(ship)
         
         left.backgroundColor = UIColor(white: 1, alpha: 0)
         left.setTitleColor(.black, for: .normal)
@@ -117,14 +117,14 @@ class GameView: UIView{
     
     func startGame()
     {
-        timer = Timer.scheduledTimer(timeInterval: 0.01667, target: self,   selector: (#selector(GameView.update)), userInfo: nil, repeats: true)
+        //timer = Timer.scheduledTimer(timeInterval: 0.01667, target: self,   selector: (#selector(GameView.update)), userInfo: nil, repeats: true)
         running = true
         pause.setTitle("pause", for: .normal)
     }
     
     func stopGame()
     {
-        timer.invalidate()
+        //timer.invalidate()
         running = false
     }
     
@@ -248,6 +248,7 @@ class GameView: UIView{
         sender.backgroundColor = theBlue
         
         shipMove = mainShipMove.left
+        theControl?.moveLeft()
         
         
     }
@@ -256,6 +257,7 @@ class GameView: UIView{
         sender.backgroundColor = theBlue
 
         shipMove = mainShipMove.right
+        theControl?.moveRight()
 
         
     }
@@ -265,6 +267,7 @@ class GameView: UIView{
 
         shipMove = mainShipMove.down
         sender.backgroundColor = theBlue
+        theControl?.moveDown()
         
         
     }
@@ -273,12 +276,13 @@ class GameView: UIView{
         sender.backgroundColor = theBlue
 
         shipMove = mainShipMove.up
-        
+        theControl?.moveUp()
         
     }
     
     @objc func up(sender: UIButton!){
         sender.backgroundColor = UIColor(white: 1, alpha: 0)
+        theControl?.stop()
         if(sender == fire)
         {
             fireTheBullet = false
@@ -311,7 +315,7 @@ class GameView: UIView{
         }
         else
         {
-            startGame()
+            //startGame()
             
         }
         

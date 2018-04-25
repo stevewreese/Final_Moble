@@ -9,26 +9,26 @@
 import UIKit
 import Foundation
 
-class ViewHolder: UIView, ControlDelegate
+class ViewHolder: UIView
 {
 
     var theControl: GameControl = GameControl()
     var theGame: GameView = GameView(frame: UIScreen.main.bounds)
     var theHighScore: HighScore = HighScore(frame: UIScreen.main.bounds)
     var theMainMenu: MainMenu = MainMenu(frame: UIScreen.main.bounds)
+    var Gl: ViewController = ViewController()
     
     override init(frame: CGRect)
     {
         super.init(frame: frame)
-        theControl.delegate = self
         
         theGame.theControl = theControl
         theHighScore.theControl = theControl
         theMainMenu.theControl = theControl
         
-        theMainMenu.backgroundColor = UIColor.white
-        theGame.backgroundColor = UIColor.white
-        theHighScore.backgroundColor = UIColor.white
+        //theMainMenu.backgroundColor = UIColor.white
+        //theGame.backgroundColor = UIColor.white
+        //theHighScore.backgroundColor = UIColor.white
         //self.addSubview(theGame)
         self.addSubview(theMainMenu)
     }
@@ -39,14 +39,18 @@ class ViewHolder: UIView, ControlDelegate
     
     func goToGame() {
         self.addSubview(theGame)
+        theMainMenu.removeFromSuperview()
         theGame.startGame()
     }
     
     func goToHighScores() {
+        theMainMenu.removeFromSuperview()
         self.addSubview(theHighScore)
     }
     
     func goToMainMenu() {
+        theGame.removeFromSuperview()
+        theHighScore.removeFromSuperview()
         self.addSubview(theMainMenu)
     }
     

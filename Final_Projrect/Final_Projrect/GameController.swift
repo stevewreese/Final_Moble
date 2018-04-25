@@ -13,6 +13,11 @@ protocol ControlDelegate: class
     func goToGame()
     func goToHighScores()
     func goToMainMenu()
+    func moveUp()
+    func moveDown()
+    func moveRight()
+    func moveLeft()
+    func stopMove()
 }
 
 class GameControl
@@ -34,4 +39,23 @@ class GameControl
         delegate?.goToMainMenu()
     }
     
+    func moveUp(){
+        delegate?.moveUp()
+    }
+    
+    func moveDown(){
+        delegate?.moveDown()
+    }
+    
+    func moveRight(){
+        delegate?.moveRight()
+    }
+    
+    func moveLeft(){
+        delegate?.moveLeft()
+    }
+    
+    func stop(){
+        delegate?.stopMove()
+    }
 }
