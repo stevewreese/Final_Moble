@@ -12,7 +12,7 @@ import Foundation
 class ViewHolder: UIView
 {
 
-    var theControl: GameControl = GameControl()
+    //var theControl: GameControl = GameControl()
     var theGame: GameView = GameView(frame: UIScreen.main.bounds)
     var theHighScore: HighScore = HighScore(frame: UIScreen.main.bounds)
     var theMainMenu: MainMenu = MainMenu(frame: UIScreen.main.bounds)
@@ -22,9 +22,9 @@ class ViewHolder: UIView
     {
         super.init(frame: frame)
         
-        theGame.theControl = theControl
-        theHighScore.theControl = theControl
-        theMainMenu.theControl = theControl
+        //theGame.theControl = theControl
+        //theHighScore.theControl = theControl
+        //theMainMenu.theControl = theControl
         
         //theMainMenu.backgroundColor = UIColor.white
         //theGame.backgroundColor = UIColor.white

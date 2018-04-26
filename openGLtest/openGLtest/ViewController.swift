@@ -10,7 +10,7 @@ import GLKit
 
 class ViewController: GLKViewController, ControlDelegate{
     
-    var theControl: GameControl = GameControl()
+    
     var theGame: GameView = GameView(frame: UIScreen.main.bounds)
     var theHighScore: HighScore = HighScore(frame: UIScreen.main.bounds)
     var theMainMenu: MainMenu = MainMenu(frame: UIScreen.main.bounds)
@@ -19,6 +19,10 @@ class ViewController: GLKViewController, ControlDelegate{
     var shipMove: mainShipMove = mainShipMove.up
     
     var stop = true
+    
+    var collectCoors: Array<Float> = [0.0, -0.8, 0.3, -1.0, -0.3, -1.0]
+    
+    var theControl: GameControl? = nil
 
     
     let triangleData: [Float] = [
@@ -50,8 +54,10 @@ class ViewController: GLKViewController, ControlDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        theControl = GameControl(coors: collectCoors)
         
-        theControl.delegate = self
+        
+        theControl?.delegate = self
         
         theGame.theControl = theControl
         theHighScore.theControl = theControl
@@ -138,6 +144,8 @@ class ViewController: GLKViewController, ControlDelegate{
         
         self.view.addSubview(theMainMenu)
         
+        //theControl.print(coors: collectCoors)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -153,23 +161,37 @@ class ViewController: GLKViewController, ControlDelegate{
             {
             case .left:
                 animationX1 -= 0.01
+                collectCoors[0] -= 0.01
+                collectCoors[2] -= 0.01
+                collectCoors[4] -= 0.01
                 break
             case .right:
                 animationX1 += 0.01
+                collectCoors[0] += 0.01
+                collectCoors[2] += 0.01
+                collectCoors[4] += 0.01
                 break
             case .up:
                 if(animationY1 <= 1.8)
                 {
                     animationY1 += 0.01
+                    collectCoors[1] += 0.01
+                    collectCoors[3] += 0.01
+                    collectCoors[5] += 0.01
                 }
                 break
             case .down:
                 if(animationY1 >= -0.8){
                     animationY1 -= 0.01
+                    collectCoors[1] -= 0.01
+                    collectCoors[3] -= 0.01
+                    collectCoors[5] -= 0.01
                 }
                 
                 break
             }
+            
+            theControl?.updateCoors(coors: collectCoors)
                 
             //TODO DRAW A TRIANGLE
             //animationX1 += 0.001
@@ -185,9 +207,9 @@ class ViewController: GLKViewController, ControlDelegate{
             glUniform2f(glGetUniformLocation(program, "translate"), animationX1, animationY1)
             glDrawArrays(GLenum(GL_TRIANGLES), 0, 3)
             
-            //glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
-            //glUniform2f(glGetUniformLocation(program, "translate"), animationX2, animationY2)
-            //glDrawArrays(GLenum(GL_TRIANGLES), 4, 3)
+            glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
+            glUniform2f(glGetUniformLocation(program, "translate"), animationX2, animationY2)
+            glDrawArrays(GLenum(GL_TRIANGLES), 4, 3)
         
 
     }

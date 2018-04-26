@@ -23,6 +23,19 @@ protocol ControlDelegate: class
 class GameControl
 {
     weak var delegate: ControlDelegate? = nil
+    var theModel: GameModel? = nil
+    
+    init(coors: Array<Float>){
+        theModel = GameModel(coors: coors)
+    }
+    
+    func print(coors: Array<Float>){
+        theModel?.printCoords(coors: coors)
+    }
+    
+    func updateCoors(coors: Array<Float>){
+        theModel?.updateCoors(coors: coors)
+    }
     
     func addGame()
     {
