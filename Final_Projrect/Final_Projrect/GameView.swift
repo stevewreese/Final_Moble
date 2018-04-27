@@ -297,6 +297,7 @@ class GameView: UIView{
     @objc func fireBullet(sender: UIButton!){
         sender.backgroundColor = theBlue
         fireTheBullet = true
+        theControl?.startFire()
 
         
     }

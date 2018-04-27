@@ -18,6 +18,7 @@ protocol ControlDelegate: class
     func moveRight()
     func moveLeft()
     func stopMove()
+    func startFire()
 }
 
 class GameControl
@@ -70,5 +71,9 @@ class GameControl
     
     func stop(){
         delegate?.stopMove()
+    }
+    
+    func startFire(){
+        delegate?.startFire()
     }
 }

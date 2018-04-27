@@ -35,12 +35,17 @@ class GameModel{
         
         //print("running")
         
-        if((shipCoords![1] >= 0.0 && shipCoords![5] <= 0.0) && ()){
-            print("Hit middle")
+        if((shipCoords![0] <= 0.0 && shipCoords![1] >= 0.0) && (shipCoords![2] <= 0.0 && shipCoords![3] >= 0.0))
+        {
+            //print("Hit middle")
         }
         else{
-            print("Not Hit middle")
+            //print("Not Hit middle")
         }
+    }
+    
+    func makeEquation(){
+        
     }
     
 

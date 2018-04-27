@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546403333.62046"
+            timestampString = "546481453.939031"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
             landmarkName = "stopMove()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546403333.620926"
+            timestampString = "546481453.939464"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
             landmarkName = "moveUp()"
             landmarkType = "7">
          </BreakpointContent>

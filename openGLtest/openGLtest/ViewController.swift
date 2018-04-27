@@ -9,6 +9,8 @@
 import GLKit
 
 class ViewController: GLKViewController, ControlDelegate{
+
+    
     
     
     var theGame: GameView = GameView(frame: UIScreen.main.bounds)
@@ -19,28 +21,36 @@ class ViewController: GLKViewController, ControlDelegate{
     var shipMove: mainShipMove = mainShipMove.up
     
     var stop = true
+    var fire = false
     
-    var collectCoors: Array<Float> = [0.0, -0.8, 0.3, -1.0, -0.3, -1.0]
+    var collectCoors: Array<Float> = [-0.3, 0.3, -1.0, -0.8]
     
     var theControl: GameControl? = nil
 
     
     let triangleData: [Float] = [
-        +0.0, -0.8,
+        +0.3, -0.8,
+        -0.3, -0.8,
+        +0.3, -1.0,
+        
+        -0.3, -0.8,
         +0.3, -1.0,
         -0.3, -1.0,
-        +0.40, -0.10,
-        -0.80, +0.50,
-        -0.15, -0.75,
+
+        
+        
+       // +0.40, -0.10,
+        //-0.80, +0.50,
+        //-0.15, -0.75,
     ]
     
     let triangleTextureCoordinateData: [Float] = [
         0.0, 0.0,
         1.0, 0.0,
         0.0, 1.0,
-        0.5, 0.0,
-        1.0, 0.7,
-        0.2, 1.0,
+        1.0, 0.0,
+        1.0, 1.0,
+        0.0, 1.0,
     ]
     
     var marsTextureInfo: GLKTextureInfo? = nil
@@ -136,13 +146,19 @@ class ViewController: GLKViewController, ControlDelegate{
         let marsTextureImage: UIImage = UIImage(named: "mars")!
         marsTextureInfo = try! GLKTextureLoader.texture(with: marsTextureImage.cgImage!, options: [:])
         
-        let plutoTextureImage: UIImage = UIImage(named: "pluto")!
+        let plutoTextureImage: UIImage = UIImage(named: "mars")!
         plutoTextureInfo = try! GLKTextureLoader.texture(with: plutoTextureImage.cgImage!, options: [:])
         
         
         glClearColor(1.0, 0.0, 0.0, 0.0)
         
         self.view.addSubview(theMainMenu)
+        
+        var bullet: UIView = UIView(frame: CGRect(x: 200, y: 450, width: 2, height: 10))
+        bullet.backgroundColor = UIColor.black
+        theGame.addSubview(bullet)
+        
+        addPlacementbox()
         
         //theControl.print(coors: collectCoors)
         
@@ -162,36 +178,34 @@ class ViewController: GLKViewController, ControlDelegate{
             case .left:
                 animationX1 -= 0.01
                 collectCoors[0] -= 0.01
-                collectCoors[2] -= 0.01
-                collectCoors[4] -= 0.01
+                collectCoors[1] -= 0.01
                 break
             case .right:
                 animationX1 += 0.01
                 collectCoors[0] += 0.01
-                collectCoors[2] += 0.01
-                collectCoors[4] += 0.01
+                collectCoors[1] += 0.01
                 break
             case .up:
                 if(animationY1 <= 1.8)
                 {
                     animationY1 += 0.01
-                    collectCoors[1] += 0.01
+                    collectCoors[2] += 0.01
                     collectCoors[3] += 0.01
-                    collectCoors[5] += 0.01
                 }
                 break
             case .down:
                 if(animationY1 >= -0.8){
                     animationY1 -= 0.01
-                    collectCoors[1] -= 0.01
+                    collectCoors[2] -= 0.01
                     collectCoors[3] -= 0.01
-                    collectCoors[5] -= 0.01
                 }
                 
                 break
             }
             
             theControl?.updateCoors(coors: collectCoors)
+            
+
                 
             //TODO DRAW A TRIANGLE
             //animationX1 += 0.001
@@ -200,16 +214,22 @@ class ViewController: GLKViewController, ControlDelegate{
             //animationX2 -= 0.002
             //animationY2 += 0.0015
         }
+        
+        if(fire){
+            addPlacementbox()
+            fire = false
+        }
+        
             glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
   
             
             glBindTexture(GLenum(GL_TEXTURE_2D), marsTextureInfo!.name)
             glUniform2f(glGetUniformLocation(program, "translate"), animationX1, animationY1)
-            glDrawArrays(GLenum(GL_TRIANGLES), 0, 3)
+            glDrawArrays(GLenum(GL_TRIANGLES), 0, 6)
             
-            glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
-            glUniform2f(glGetUniformLocation(program, "translate"), animationX2, animationY2)
-            glDrawArrays(GLenum(GL_TRIANGLES), 4, 3)
+            //glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
+            //glUniform2f(glGetUniformLocation(program, "translate"), animationX2, animationY2)
+            //glDrawArrays(GLenum(GL_TRIANGLES), 4, 6)
         
 
     }
@@ -256,6 +276,50 @@ class ViewController: GLKViewController, ControlDelegate{
     func stopMove(){
         stop = true
     }
+    
+    func startFire() {
+        fire = true
+    }
+    
+    func addPlacementbox(){
+        var x1: Float = 0.0
+        var y1: Float = 0.0
+        var x2 = 0
+        var y2 = 0
+        var x3 = 0
+        var y3 = 0
+        var x4 = 0
+        var y4 = 0
+        
+         print("\((1+collectCoors[0])) + \((collectCoors[3]))")
+        
+        if(collectCoors[0] < 0){
+            x1 = Float( UIScreen.main.bounds.width / 2.0) * (1+collectCoors[0])
+        }
+        else
+        {
+             x1 =  Float( UIScreen.main.bounds.width / 2.0) * collectCoors[0] + Float(UIScreen.main.bounds.width/2)
+        }
+        
+        if(collectCoors[2] < 0){
+            y1 = Float(UIScreen.main.bounds.height / 2.0) * collectCoors[3] * -1.0 + Float(UIScreen.main.bounds.height/2)
+        }
+        else
+        {
+            y1 = Float( UIScreen.main.bounds.height / 2.0) * (1-collectCoors[3])
+        }
+        
+        print("\(x1) + \(y1)")
+        
+        var bullet: UIView = UIView(frame: CGRect(x: Int (x1), y: Int (y1), width: 20, height: 20))
+        bullet.backgroundColor = UIColor.black
+        theGame.addSubview(bullet)
+        
+        
+        
+    }
+    
+    
     
     
 
