@@ -6,7 +6,7 @@
 //  Copyright © 2018 Stephen Reese. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol ControlDelegate: class
 {
@@ -19,6 +19,7 @@ protocol ControlDelegate: class
     func moveLeft()
     func stopMove()
     func startFire()
+    func stopFire()
 }
 
 class GameControl
@@ -26,16 +27,16 @@ class GameControl
     weak var delegate: ControlDelegate? = nil
     var theModel: GameModel? = nil
     
-    init(coors: Array<Float>){
-        theModel = GameModel(coors: coors)
+    init(coors: Array<Float>, eCoors: Array<Float>){
+        theModel = GameModel(coors: coors, eCoors: eCoors)
     }
     
     func print(coors: Array<Float>){
         theModel?.printCoords(coors: coors)
     }
     
-    func updateCoors(coors: Array<Float>){
-        theModel?.updateCoors(coors: coors)
+    func updateCoors(coors: Array<Float>, eCoors: Array<Float>){
+        theModel?.updateCoors(coors: coors,  eCoors: eCoors)
     }
     
     func addGame()
@@ -75,5 +76,18 @@ class GameControl
     
     func startFire(){
         delegate?.startFire()
+    }
+    
+    func stopFire(){
+        delegate?.stopFire()
+    }
+    
+    func updateBullet(bulletList: Array<UIView>){
+        theModel?.bullets = bulletList
+    }
+    
+    func update() -> Array<Int>
+    {
+        return (theModel?.update())!
     }
 }

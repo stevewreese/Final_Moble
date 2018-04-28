@@ -285,7 +285,7 @@ class GameView: UIView{
         theControl?.stop()
         if(sender == fire)
         {
-            fireTheBullet = false
+            theControl?.stopFire()
         }
         else{
             shipMove = mainShipMove.stop
