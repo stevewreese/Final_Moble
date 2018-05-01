@@ -14,11 +14,11 @@ class GameView: UIView{
     
     var runGame = true;
     var ship = playerShip(frame: CGRect(x: Int(UIScreen.main.bounds.width/2), y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50) )
-    let left = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50))
+    let left = UIButton(frame: CGRect(x: 250, y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50))
     let right = UIButton(frame: CGRect(x: 350, y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50))
     let up = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 150), width: 50, height: 50))
     let down = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 50), width: 50, height: 50))
-    let fire = UIButton(frame: CGRect(x: 0, y: Int(UIScreen.main.bounds.height - 50), width: 50, height: 50))
+    let fire = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50))
     let main = UIButton(frame: CGRect(x: UIScreen.main.bounds.width
         - 100, y: 15, width: 100, height: 20))
     let pause = UIButton(frame: CGRect(x: 15, y: 15, width: 100, height: 20))
@@ -62,7 +62,7 @@ class GameView: UIView{
         self.addSubview(scoreLabel)
         
         
-        left.backgroundColor = UIColor(white: 1, alpha: 0)
+        left.backgroundColor = UIColor(white: 0, alpha: 0.2)
         left.setTitleColor(.white, for: .normal)
         left.setTitle("<", for: .normal)
         left.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
@@ -70,7 +70,7 @@ class GameView: UIView{
         
         self.addSubview(left)
         
-        right.backgroundColor = UIColor(white: 1, alpha: 0)
+        right.backgroundColor = UIColor(white: 0, alpha: 0.2)
         right.setTitleColor(.white, for: .normal)
         right.setTitle(">", for: .normal)
         right.addTarget(self, action: #selector(GameView.moveRight(sender:)), for: .touchDown)
@@ -78,7 +78,7 @@ class GameView: UIView{
         
         self.addSubview(right)
         
-        up.backgroundColor = UIColor(white: 1, alpha: 0)
+        up.backgroundColor = UIColor(white: 0, alpha: 0.2)
         up.setTitleColor(.white, for: .normal)
         up.setTitle("up", for: .normal)
         up.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
@@ -86,7 +86,7 @@ class GameView: UIView{
         
         self.addSubview(up)
         
-        down.backgroundColor = UIColor(white: 1, alpha: 0)
+        down.backgroundColor = UIColor(white: 0, alpha: 0.2)
         down.setTitleColor(.white, for: .normal)
         down.setTitle("down", for: .normal)
         down.addTarget(self, action: #selector(GameView.moveDown(sender:)), for: .touchDown)
@@ -94,7 +94,7 @@ class GameView: UIView{
         
         self.addSubview(down)
         
-        fire.backgroundColor = UIColor(white: 1, alpha: 0)
+        fire.backgroundColor = UIColor(white: 0, alpha: 0.2)
         fire.setTitleColor(.white, for: .normal)
         fire.setTitle("fire", for: .normal)
         fire.addTarget(self, action: #selector(GameView.fireBullet(sender:)), for: .touchDown)
@@ -144,114 +144,6 @@ class GameView: UIView{
         }*/
     }
     
-    @objc func update() {
-        
-        if(shipsSecondCount == 60)
-        {
-            makeNewShip(theX: xplus, theY: -100)
-            xplus = xplus + 50
-            if(xplus == 400)
-            {
-                xplus = 0
-            }
-            shipsSecondCount = 0
-        }
-        else{
-            shipsSecondCount = 1 + shipsSecondCount
-        }
-        var shipIndex = 0
-        for ship in enemyList
-        {
-            ship.frame.origin.y = ship.frame.origin.y + 5
-            
-            if(ship.frame.origin.y + 10 == UIScreen.main.bounds.height)
-            {
-                enemyList.remove(at: shipIndex)
-                ship.removeFromSuperview()
-            }
-            
-            shipIndex = shipIndex + 1
-
-        }
-        
-        
-        if(fireTheBullet)
-        {
-            if(whenToFire == 10)
-            {
-                var bullet: UIView = UIView(frame: CGRect(x: self.ship.frame.origin.x + 25, y: self.ship.frame.origin.y, width: 2, height: 10))
-                bullet.backgroundColor = UIColor.red
-                bulletList.append(bullet)
-                self.addSubview(bullet)
-                whenToFire = 0
-            }
-            else
-            {
-                whenToFire = whenToFire + 1
-            }
-
-        }
-        else{
-            whenToFire = 10
-        }
-
-        
-        var index = 0
-        
-        for bullet in bulletList
-        {
-            bullet.frame.origin.y = bullet.frame.origin.y - 10
-            if(bullet.frame.origin.y - 10 == 0)
-            {
-                bulletList.remove(at: index)
-                bullet.removeFromSuperview()
-            }
-            index = index + 1
-        }
-        
-        switch(shipMove)
-        {
-        case .left :
-            if(self.ship.frame.origin.x <= 0)
-            {
-                
-            }
-            else{
-                self.ship.frame.origin.x =  ship.frame.origin.x - CGFloat(movementSpeed)
-            }
-            break
-        case .stop:
-            break
-        case .right:
-            if(self.ship.frame.origin.x >= UIScreen.main.bounds.width - 50)
-            {
-                
-            }
-            else{
-                self.ship.frame.origin.x =  ship.frame.origin.x  + CGFloat(movementSpeed)
-            }
-            break
-        case .up:
-            if(self.ship.frame.origin.y <= 0)
-            {
-                
-            }
-            else{
-                self.ship.frame.origin.y =  ship.frame.origin.y - CGFloat(movementSpeed)
-            }
-            break
-        case .down:
-            if(self.ship.frame.origin.y >= UIScreen.main.bounds.height - 50)
-            {
-                
-            }
-            else{
-                self.ship.frame.origin.y =  ship.frame.origin.y + CGFloat(movementSpeed)
-            }
-            break
-        }
-    }
-    
     @objc func moveLeft(sender: UIButton!){
         sender.backgroundColor = theBlue
         
@@ -289,7 +181,7 @@ class GameView: UIView{
     }
     
     @objc func up(sender: UIButton!){
-        sender.backgroundColor = UIColor(white: 1, alpha: 0)
+        sender.backgroundColor = UIColor(white: 0, alpha: 0.2)
         theControl?.stop()
         if(sender == fire)
         {
@@ -332,14 +224,7 @@ class GameView: UIView{
         
     }
     
-    func makeNewShip(theX: Int, theY: Int)
-    {
-        var eShip = playerShip(frame: CGRect(x: theX, y: theY, width: 50, height: 50) )
-        eShip.backgroundColor = UIColor.white
-        eShip.backgroundColor = UIColor.blue
-        self.addSubview(eShip)
-        enemyList.append(eShip)
-    }
+
     
     func setScore(score: Int){
         scoreLabel.text = "Score: \(score)"

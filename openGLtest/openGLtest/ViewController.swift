@@ -44,6 +44,7 @@ class ViewController: GLKViewController, ControlDelegate{
     var score = 0
     var stage = 0
     var speed : Float = 0.003
+    var shipdSpeed : Float = 0.05
     var damage = 10
 
     
@@ -228,7 +229,6 @@ class ViewController: GLKViewController, ControlDelegate{
         theGame.theControl = theControl
         theHighScore.theControl = theControl
         theMainMenu.theControl = theControl
-        view.backgroundColor = UIColor(patternImage: UIImage(named: "level1")!)
         
         //theHighScore.backgroundColor = .white
         
@@ -339,9 +339,9 @@ class ViewController: GLKViewController, ControlDelegate{
                 case .left:
                     if(collectCoors[0] >= -1.0)
                     {
-                        animationX1 -= 0.01
-                        collectCoors[0] -= 0.01
-                        collectCoors[1] -= 0.01
+                        animationX1 -= shipdSpeed
+                        collectCoors[0] -= shipdSpeed
+                        collectCoors[1] -= shipdSpeed
                         
                     }
  
@@ -349,24 +349,24 @@ class ViewController: GLKViewController, ControlDelegate{
                 case .right:
                     if(collectCoors[1] <= 1.0)
                     {
-                        animationX1 += 0.01
-                        collectCoors[0] += 0.01
-                        collectCoors[1] += 0.01
+                        animationX1 += shipdSpeed
+                        collectCoors[0] += shipdSpeed
+                        collectCoors[1] += shipdSpeed
                     }
                     break
                 case .up:
                     if(collectCoors[2] + animationY1 <= 2.5)
                     {
-                        animationY1 += 0.01
-                        collectCoors[2] += 0.01
-                        collectCoors[3] += 0.01
+                        animationY1 += shipdSpeed
+                        collectCoors[2] += shipdSpeed
+                        collectCoors[3] += shipdSpeed
                     }
                     break
                 case .down:
                     if(collectCoors[3] + animationY1 >= -0.8){
-                        animationY1 -= 0.01
-                        collectCoors[2] -= 0.01
-                        collectCoors[3] -= 0.01
+                        animationY1 -= shipdSpeed
+                        collectCoors[2] -= shipdSpeed
+                        collectCoors[3] -= shipdSpeed
                     }
                     
                     break
@@ -796,6 +796,8 @@ class ViewController: GLKViewController, ControlDelegate{
     }
     
     func newGame(){
+        let backgroundImage: UIImage = UIImage(named: "level1")!
+        backgroundTextureInfo = try! GLKTextureLoader.texture(with: backgroundImage.cgImage!, options: [:])
         popArray()
         animation = [Float](repeating: 0.0, count: 16)
         timing = [0, 120, 70, 180, 200, 260, 300, 360]
