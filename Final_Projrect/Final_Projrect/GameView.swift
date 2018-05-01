@@ -23,6 +23,8 @@ class GameView: UIView{
         - 100, y: 15, width: 100, height: 20))
     let pause = UIButton(frame: CGRect(x: 15, y: 15, width: 100, height: 20))
     
+    var scoreLabel: UILabel = UILabel(frame: CGRect(x: UIScreen.main.bounds.width/2 - 100, y: 20, width: 200, height: 21))
+    
    
     var bulletList: Array<UIView> = Array()
     var enemyList: Array<UIView> = Array()
@@ -53,6 +55,11 @@ class GameView: UIView{
         super.init(frame: frame)
         //ship.backgroundColor = UIColor.white
         //self.addSubview(ship)
+        
+        scoreLabel.text = "Score: 0"
+        scoreLabel.textAlignment = NSTextAlignment.center
+        self.addSubview(scoreLabel)
+        
         
         left.backgroundColor = UIColor(white: 1, alpha: 0)
         left.setTitleColor(.black, for: .normal)
@@ -331,6 +338,10 @@ class GameView: UIView{
         eShip.backgroundColor = UIColor.blue
         self.addSubview(eShip)
         enemyList.append(eShip)
+    }
+    
+    func setScore(score: Int){
+        scoreLabel.text = "Score: \(score)"
     }
     
     

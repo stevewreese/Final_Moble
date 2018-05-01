@@ -10,7 +10,7 @@ import UIKit
 
 struct results {
     var removelist: Array<Int> = Array()
-    var hit = false
+    var hit: Array<Int> = Array()
 }
 
 class GameModel{
@@ -154,23 +154,33 @@ class GameModel{
         
     }
     
-    func checkShipColl() -> Bool
+    func checkShipColl() -> Array<Int>
     {
+        var hitList: Array<Int> = Array()
+        hitList.append(0)
+        var index = 0
         for eCoors in enemyCoordsXY
         {
+
             if((eCoors[2] <= shipCoordsXY[2] && eCoors[2] >= shipCoordsXY[3]) && (eCoors[0] >= shipCoordsXY[0] && eCoors[0] <= shipCoordsXY[1]))
             {
+                hitList[0] = 1
+                hitList.append(index)
                 
-                return true
+                return hitList
             }
             else if((shipCoordsXY[3] <= eCoors[2] && shipCoordsXY[3] >= eCoors[3]) && (shipCoordsXY[0] >= eCoors[0] && shipCoordsXY[0] <= eCoors[1]))
             {
-                return true
+                hitList[0] = 1
+                hitList.append(index)
+                return hitList
             }
             else{
+                
             }
+            index += 1
         }
-        return false
+        return hitList
 
         
     }

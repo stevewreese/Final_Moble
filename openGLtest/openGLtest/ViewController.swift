@@ -40,6 +40,7 @@ class ViewController: GLKViewController, ControlDelegate{
     var theControl: GameControl? = nil
     var gameProgGreen: UIView? = nil
     var lifeBar = 100
+    var score = 0
 
     
     let triangleData: [Float] = [
@@ -392,9 +393,12 @@ class ViewController: GLKViewController, ControlDelegate{
                 bulletList[theResuts.removelist[1]].removeFromSuperview()
                 bulletList.remove(at: theResuts.removelist[1])
                 enemyHit(index: theResuts.removelist[2])
+                score += 25
+                theGame.setScore(score: score)
             }
             
-            if(theResuts.hit){
+            if(theResuts.hit[0] == 1){
+                enemyHit(index: theResuts.hit[1])
                 lifeBar -= 1
             }
             if(lifeBar >= 0)
@@ -538,7 +542,20 @@ class ViewController: GLKViewController, ControlDelegate{
             
        
             if(checkWinState()){
-                goToMainMenu()
+                
+                if(theLevel == level.one)
+                {
+                    newLevel()
+                    theLevel = level.two
+                }
+                else if(theLevel == level.two)
+                {
+                    newLevel()
+                    theLevel = level.three
+                }
+                else{
+                    print("win")
+                }
             }
             
             
@@ -741,6 +758,22 @@ class ViewController: GLKViewController, ControlDelegate{
         enemyInPlay = [true, true, true, true, true, true, true, true]
         self.view.addSubview(theGame)
         theMainMenu.removeFromSuperview()
+        pause = false
+        count = 0
+        lifeBar = 100
+        score = 0
+        theGame.setScore(score: score)
+        for b in bulletList{
+            let index = bulletList.index(of: b)
+            bulletList[index!].removeFromSuperview()
+            bulletList.remove(at: index!)
+        }
+    }
+    
+    func newLevel(){
+        popArray()
+        animation = [Float](repeating: 0.0, count: 16)
+        enemyInPlay = [true, true, true, true, true, true, true, true]
         pause = false
         count = 0
     }
