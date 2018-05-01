@@ -309,14 +309,15 @@ class GameView: UIView{
     }
     
     @objc func pause(sender: UIButton!) {
-        if(running)
+        if(sender.titleLabel?.text == "pause")
         {
-            stopGame()
+            theControl?.pauseGame()
             pause.setTitle("start", for: .normal)
         }
         else
         {
-            //startGame()
+            theControl?.unPauseGame()
+            pause.setTitle("pause", for: .normal)
             
         }
         

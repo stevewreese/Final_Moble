@@ -17,38 +17,105 @@ class ViewController: GLKViewController, ControlDelegate{
     var theHighScore: HighScore = HighScore(frame: UIScreen.main.bounds)
     var theMainMenu: MainMenu = MainMenu(frame: UIScreen.main.bounds)
     
+    enum level {case one, two, three}
+    var theLevel: level = level.one
+    
     enum mainShipMove {case left, right, up, down}
     var shipMove: mainShipMove = mainShipMove.up
     
     var stop = true
     var fire = false
+    var pause = true
     
     var whenToFire = 5
     
+    var count = 0;
+    
     var collectCoors: Array<Float> = [-0.3, 0.3, -1.0, -0.8]
-    var enemyCoors: Array<Float> = [-0.30, +0.3, 0.1, 0.0]
+    var enemyCoors: Array<Array<Float>> = Array()
     var bulletList: Array<UIView> = Array()
+    var enemyInPlay: Array<Bool> = [true, true, true, true, true, true, true, true]
+    var animation: Array<Float> = [Float](repeating: 0.0, count: 16)
     
     var theControl: GameControl? = nil
+    var gameProgGreen: UIView? = nil
+    var lifeBar = 100
 
     
     let triangleData: [Float] = [
         +0.3, -0.8,
         -0.3, -0.8,
         +0.3, -1.0,
-        
         -0.3, -0.8,
         +0.3, -1.0,
         -0.3, -1.0,
-
         
-       +0.30, +0.10,
-       -0.30, +0.10,
-       -0.30,  +0.0,
+        //enemy 1
+       +0.3, +1.0,
+       +0.0, +1.0,
+        0.3, +1.1,
+       +0.0, +1.0,
+       +0.3, +1.1,
+        0.0, +1.1,
        
-       +0.30, +0.10,
-       +0.30, +0.0,
-       -0.30,  +0.0,
+       //enemy 2
+       -0.30, -1.1,
+       -0.60, -1.1,
+       -0.30, -1.0,
+       -0.60, -1.1,
+       -0.30, -1.0,
+       -0.60, -1.0,
+       
+       //enemy 3
+        -0.30, 1.0,
+        -0.60, 1.0,
+        -0.30, 1.1,
+        -0.60, 1.0,
+        -0.30, 1.1,
+        -0.60, 1.1,
+        
+        //enemy 4
+        0.70, -1.1,
+        0.40, -1.1,
+        0.7, -1.0,
+        0.4, -1.1,
+        0.7, -1.0,
+        0.4, -1.0,
+        
+        //enemy 5
+        +0.90, -1.10,
+        +0.70, -1.10,
+        +0.90, -1.0,
+        +0.70, -1.1,
+        +0.90, -1.0,
+        +0.70, -1.0,
+        
+        //enemy 6
+        -1.10, 1.0,
+        -1.40, 1.0,
+        -1.10, 1.1,
+        -1.40, 1.0,
+        -1.10, 1.1,
+        -1.40, 1.1,
+        
+        //enemy 7
+        +1.40, +1.0,
+        +1.10, +1.0,
+        +1.40, +1.10,
+        +1.10, +1.0,
+        +1.40, +1.10,
+        +1.10, +1.1,
+        
+        //enemy 8
+        -0.8, -1.1,
+        -1.0, -1.1,
+        -0.8, -1.0,
+        -1.0, -1.1,
+        -0.8, -1.0,
+        -1.0, -1.0,
+        
+       
+       
     ]
     
     let triangleTextureCoordinateData: [Float] = [
@@ -59,25 +126,82 @@ class ViewController: GLKViewController, ControlDelegate{
         1.0, 1.0,
         0.0, 1.0,
 
+        //1
         0.0, 0.0,
         1.0, 0.0,
         0.0, 1.0,
         1.0, 0.0,
         1.0, 1.0,
         0.0, 1.0,
+        //2
+        0.0, 1.0,
+        1.0, 1.0,
+        1.0, 0.0,
+        0.0, 1.0,
+        1.0, 0.0,
+        0.0, 0.0,
+        //3
+        0.0, 0.0,
+        1.0, 0.0,
+        0.0, 1.0,
+        1.0, 0.0,
+        1.0, 1.0,
+        0.0, 1.0,
+        //4
+        0.0, 1.0,
+        1.0, 1.0,
+        1.0, 0.0,
+        0.0, 1.0,
+        1.0, 0.0,
+        0.0, 0.0,
+        //5
+        0.0, 1.0,
+        1.0, 1.0,
+        1.0, 0.0,
+        0.0, 1.0,
+        1.0, 0.0,
+        0.0, 0.0,
+
+        //6
+        0.0, 0.0,
+        1.0, 0.0,
+        0.0, 1.0,
+        1.0, 0.0,
+        1.0, 1.0,
+        0.0, 1.0,
+        
+        //7
+        0.0, 0.0,
+        1.0, 0.0,
+        0.0, 1.0,
+        1.0, 0.0,
+        1.0, 1.0,
+        0.0, 1.0,
+        
+        //8
+        0.0, 1.0,
+        1.0, 1.0,
+        1.0, 0.0,
+        0.0, 1.0,
+        1.0, 0.0,
+        0.0, 0.0,
+
     ]
     
     var marsTextureInfo: GLKTextureInfo? = nil
     var plutoTextureInfo: GLKTextureInfo? = nil
+    var plutoTextureInfo2: GLKTextureInfo? = nil
     
     var program: GLuint = 0
     var animationX1: Float = 0.0
     var animationY1: Float = 0.0
-    var animationX2: Float = 0.0
-    var animationY2: Float = 0.0
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        popArray()
+        
         theControl = GameControl(coors: collectCoors, eCoors: enemyCoors)
         
         
@@ -163,10 +287,17 @@ class ViewController: GLKViewController, ControlDelegate{
         let plutoTextureImage: UIImage = UIImage(named: "pluto")!
         plutoTextureInfo = try! GLKTextureLoader.texture(with: plutoTextureImage.cgImage!, options: [:])
         
+        let plutoTextureImage2: UIImage = UIImage(named: "pluto")!
+        plutoTextureInfo2 = try! GLKTextureLoader.texture(with: plutoTextureImage2.cgImage!, options: [:])
+        
         
         glClearColor(1.0, 0.0, 0.0, 0.0)
         
         self.view.addSubview(theMainMenu)
+        
+        gameProgGreen = UIView(frame: CGRect(x: 200, y: 50, width: lifeBar * 2, height: 5))
+        gameProgGreen?.backgroundColor = .green
+        theGame.addSubview(gameProgGreen!)
                 
     }
 
@@ -176,103 +307,292 @@ class ViewController: GLKViewController, ControlDelegate{
     }
     
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
-        if(!stop)
+        
+        glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
+        
+        if(!pause)
         {
-            
-            switch(shipMove)
+            if(!stop)
             {
-            case .left:
-                animationX1 -= 0.01
-                collectCoors[0] -= 0.01
-                collectCoors[1] -= 0.01
-                break
-            case .right:
-                animationX1 += 0.01
-                collectCoors[0] += 0.01
-                collectCoors[1] += 0.01
-                break
-            case .up:
-                if(animationY1 <= 1.8)
+                
+                switch(shipMove)
                 {
-                    animationY1 += 0.01
-                    collectCoors[2] += 0.01
-                    collectCoors[3] += 0.01
-                }
-                break
-            case .down:
-                if(animationY1 >= -0.8){
-                    animationY1 -= 0.01
-                    collectCoors[2] -= 0.01
-                    collectCoors[3] -= 0.01
+                case .left:
+                    if(collectCoors[0] >= -1.0)
+                    {
+                        animationX1 -= 0.01
+                        collectCoors[0] -= 0.01
+                        collectCoors[1] -= 0.01
+                        
+                    }
+ 
+                    break
+                case .right:
+                    if(collectCoors[1] <= 1.0)
+                    {
+                        animationX1 += 0.01
+                        collectCoors[0] += 0.01
+                        collectCoors[1] += 0.01
+                    }
+                    break
+                case .up:
+                    if(collectCoors[2] + animationY1 <= 2.5)
+                    {
+                        animationY1 += 0.01
+                        collectCoors[2] += 0.01
+                        collectCoors[3] += 0.01
+                    }
+                    break
+                case .down:
+                    if(collectCoors[3] + animationY1 >= -0.8){
+                        animationY1 -= 0.01
+                        collectCoors[2] -= 0.01
+                        collectCoors[3] -= 0.01
+                    }
+                    
+                    break
                 }
                 
-                break
             }
             
-        }
-        
-        theControl?.updateCoors(coors: collectCoors, eCoors: enemyCoors)
-        
-        
-        if(fire){
-            if(whenToFire == 5)
+            theControl?.updateCoors(coors: collectCoors, eCoors: enemyCoors)
+            
+            
+            if(fire){
+                if(whenToFire == 5)
+                {
+                    fireWeapon()
+                    whenToFire = 0
+                }
+                else{
+                    whenToFire += 1
+                }
+            }
+            
+            var index = 0
+            
+            for bullet in bulletList
             {
-                fireWeapon()
-                whenToFire = 0
+                bullet.frame.origin.y = bullet.frame.origin.y - 10
+                if(bullet.frame.origin.y - 10 <= 0)
+                {
+                    bulletList.remove(at: index)
+                    bullet.removeFromSuperview()
+                }
+                index = index + 1
+            }
+            
+            theControl?.updateBullet(bulletList: bulletList)
+            
+            
+            var theResuts : results = (theControl?.update())!
+            
+            if(theResuts.removelist[0] == 1)
+            {
+                bulletList[theResuts.removelist[1]].removeFromSuperview()
+                bulletList.remove(at: theResuts.removelist[1])
+                enemyHit(index: theResuts.removelist[2])
+            }
+            
+            if(theResuts.hit){
+                lifeBar -= 1
+            }
+            if(lifeBar >= 0)
+            {
+                gameProgGreen?.removeFromSuperview()
+                gameProgGreen = UIView(frame: CGRect(x: 200, y: 50, width: lifeBar * 2, height: 5))
+                gameProgGreen?.backgroundColor = .green
+                theGame.addSubview(gameProgGreen!)
+
             }
             else{
-                whenToFire += 1
+                animationX1 = 3
+                collectCoors[0] = 3
+                collectCoors[1] = 3
             }
-        }
-        
-        var index = 0
-        
-        for bullet in bulletList
-        {
-            bullet.frame.origin.y = bullet.frame.origin.y - 10
-            if(bullet.frame.origin.y - 10 <= 0)
+ 
+            
+            theControl?.updateBullet(bulletList: bulletList)
+            
+            count += 1
+            
+            var enIndex = 0
+            
+            if(count >= 0 && enemyInPlay[enIndex])
             {
-                bulletList.remove(at: index)
-                bullet.removeFromSuperview()
+            
+                animation[enIndex*2 + 1] -= 0.005
+                enemyCoors[enIndex][2] -= 0.005
+                enemyCoors[enIndex][3] -= 0.005
+                if(enemyCoors[enIndex][2] < -1.1){
+                    enemyInPlay[enIndex] = false
+                }
+                
             }
-            index = index + 1
+            
+            enIndex += 1
+            
+            if(count >= 120 && enemyInPlay[enIndex])
+            {
+                animation[enIndex*2 + 1] += 0.005
+                enemyCoors[enIndex][2] += 0.005
+                enemyCoors[enIndex][3] += 0.005
+                if(enemyCoors[enIndex][2] > 1){
+                    enemyInPlay[enIndex] = false
+                }
+            }
+            
+
+            
+            enIndex += 1
+            
+            if(count >= 30 && enemyInPlay[enIndex])
+            {
+                
+                animation[enIndex*2 + 1] -= 0.005
+                enemyCoors[enIndex][2] -= 0.005
+                enemyCoors[enIndex][3] -= 0.005
+                if(enemyCoors[enIndex][3] < -1.1){
+                    enemyInPlay[enIndex] = false
+                }
+            }
+            
+            enIndex += 1
+            
+            if(count >= 180 && enemyInPlay[enIndex])
+            {
+                animation[enIndex*2 + 1] += 0.005
+                enemyCoors[enIndex][2] += 0.005
+                enemyCoors[enIndex][3] += 0.005
+                if(enemyCoors[enIndex][2] > 1){
+                    enemyInPlay[enIndex] = false
+                }
+            }
+            
+            enIndex += 1
+            
+            
+
+            
+            if(count >= 60 && enemyInPlay[enIndex])
+            {
+                animation[enIndex*2] -= 0.005
+                animation[enIndex*2 + 1] += 0.005
+                enemyCoors[enIndex][0] += -0.005
+                enemyCoors[enIndex][1] += -0.005
+                enemyCoors[enIndex][2] += 0.005
+                enemyCoors[enIndex][3] += 0.005
+                if(enemyCoors[enIndex][2] > 1.2 || enemyCoors[enIndex][0] < -1.2){
+                    enemyInPlay[enIndex] = false
+                }
+                
+            }
+            enIndex += 1
+            
+
+            
+            if(count >= 120 && enemyInPlay[enIndex])
+            {
+                animation[enIndex*2] += 0.005
+                animation[enIndex*2 + 1] -= 0.005
+                enemyCoors[enIndex][0] += 0.005
+                enemyCoors[enIndex][1] += 0.005
+                enemyCoors[enIndex][2] += -0.005
+                enemyCoors[enIndex][3] += -0.005
+                if(enemyCoors[enIndex][2] < -1.2 || enemyCoors[enIndex][0] > 1.2){
+                    enemyInPlay[enIndex] = false
+                }
+                
+                
+            }
+            enIndex += 1
+            if(count >= 200 && enemyInPlay[enIndex])
+            {
+                animation[enIndex*2] -= 0.005
+                animation[enIndex*2 + 1] -= 0.005
+                enemyCoors[enIndex][0] += -0.005
+                enemyCoors[enIndex][1] += -0.005
+                enemyCoors[enIndex][2] += -0.005
+                enemyCoors[enIndex][3] += -0.005
+                if(enemyCoors[enIndex][3] < -1.2 || enemyCoors[enIndex][0] < -1.2){
+                    enemyInPlay[enIndex] = false
+                }
+                
+                
+            }
+            enIndex += 1
+            
+            if(count >= 120 && enemyInPlay[enIndex])
+            {
+                animation[enIndex*2] += 0.005
+                animation[enIndex*2 + 1] += 0.005
+                
+                enemyCoors[enIndex][0] += 0.005
+                enemyCoors[enIndex][1] += 0.005
+                enemyCoors[enIndex][2] += 0.005
+                enemyCoors[enIndex][3] += 0.005
+                if(enemyCoors[enIndex][2] > 1.2 || enemyCoors[enIndex][0] > 1.2){
+                    enemyInPlay[enIndex] = false
+                }
+            }
+            
+       
+            if(checkWinState()){
+                goToMainMenu()
+            }
+            
+            
+
+            
         }
         
-        theControl?.updateBullet(bulletList: bulletList)
+        glBindTexture(GLenum(GL_TEXTURE_2D), marsTextureInfo!.name)
+        glUniform2f(glGetUniformLocation(program, "translate"), animationX1, animationY1)
+        glDrawArrays(GLenum(GL_TRIANGLES), 0, 6)
         
+        glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
+        glUniform2f(glGetUniformLocation(program, "translate"), animation[0], animation[1])
+        glDrawArrays(GLenum(GL_TRIANGLES), 6, 6)
+        
+        glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
+        glUniform2f(glGetUniformLocation(program, "translate"), animation[2], animation[3])
+        glDrawArrays(GLenum(GL_TRIANGLES), 12, 6)
+        
+        glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
+        glUniform2f(glGetUniformLocation(program, "translate"), animation[4], animation[5])
+        glDrawArrays(GLenum(GL_TRIANGLES), 18, 6)
+        
+        glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
+        glUniform2f(glGetUniformLocation(program, "translate"), animation[6], animation[7])
+        glDrawArrays(GLenum(GL_TRIANGLES), 24, 6)
+        
+        glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
+        glUniform2f(glGetUniformLocation(program, "translate"), animation[8], animation[9])
+        glDrawArrays(GLenum(GL_TRIANGLES), 30, 6)
+        
+        
+        glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
+        glUniform2f(glGetUniformLocation(program, "translate"), animation[10], animation[11])
+        glDrawArrays(GLenum(GL_TRIANGLES), 36, 6)
+        
+        glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
+        glUniform2f(glGetUniformLocation(program, "translate"), animation[12], animation[13])
+        glDrawArrays(GLenum(GL_TRIANGLES), 42, 6)
+        
+        glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
+        glUniform2f(glGetUniformLocation(program, "translate"), animation[14], animation[15])
+        glDrawArrays(GLenum(GL_TRIANGLES), 48, 6)
+        
+        
+ 
 
-        var removeList: Array<Int> = (theControl?.update())!
-        
-        for i in removeList{
-            bulletList[i].removeFromSuperview()
-            bulletList.remove(at: i)
-            animationY2 = 3.0
-            enemyCoors[2] += 3.0
-            enemyCoors[3] += 3.0
-        }
-        
-        theControl?.updateBullet(bulletList: bulletList)
-
-        
-
-        
-            glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
-  
-            
-            glBindTexture(GLenum(GL_TEXTURE_2D), marsTextureInfo!.name)
-            glUniform2f(glGetUniformLocation(program, "translate"), animationX1, animationY1)
-            glDrawArrays(GLenum(GL_TRIANGLES), 0, 6)
-            
-            glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
-            glUniform2f(glGetUniformLocation(program, "translate"), animationX2, animationY2)
-            glDrawArrays(GLenum(GL_TRIANGLES), 6, 12)
-        
 
     }
     
     func goToGame() {
         self.view.addSubview(theGame)
         theMainMenu.removeFromSuperview()
+        pause = false
         //stop = false
     }
     
@@ -280,6 +600,7 @@ class ViewController: GLKViewController, ControlDelegate{
         theMainMenu.removeFromSuperview()
         self.view.addSubview(theHighScore)
         stop = true
+        pause = true
     }
     
     func goToMainMenu() {
@@ -287,6 +608,7 @@ class ViewController: GLKViewController, ControlDelegate{
         theHighScore.removeFromSuperview()
         self.view.addSubview(theMainMenu)
         stop = true
+        pause = true
     }
     
     func moveUp() {
@@ -319,6 +641,14 @@ class ViewController: GLKViewController, ControlDelegate{
     
     func stopFire() {
         fire = false
+    }
+    
+    func pauseGame() {
+        pause = true
+    }
+    
+    func unPauseGame() {
+        pause = false
     }
     
     
@@ -358,6 +688,61 @@ class ViewController: GLKViewController, ControlDelegate{
         
         
         
+    }
+    
+    func popArray(){
+        enemyCoors.removeAll()
+        var numberOfEnemies = 8
+        var index = 0
+        var theIndex = 14
+        while(index < 8){
+            var newArray: Array<Float> = Array()
+            newArray.append(triangleData[theIndex])
+            theIndex += 2
+            newArray.append(triangleData[theIndex])
+            theIndex += 3
+            newArray.append(triangleData[theIndex])
+            theIndex += 2
+            newArray.append(triangleData[theIndex])
+            enemyCoors.append(newArray)
+            theIndex += 5
+            index += 1
+        }
+    }
+    
+    func enemyHit(index: Int){
+        enemyInPlay[index] = false
+        enemyCoors[index][0] = -1000
+        enemyCoors[index][1] = -1000
+        enemyCoors[index][2] = -1000
+        enemyCoors[index][3] = -1000
+        animation[index*2] = 0.0
+        animation[index*2 + 1] = 0.0
+
+    }
+    
+    func checkWinState() -> Bool
+    {
+        for boolean in enemyInPlay{
+            if(boolean){
+                return false
+            }
+    
+        }
+        return true
+    }
+    
+    func newGame(){
+        popArray()
+        animation = [Float](repeating: 0.0, count: 16)
+        animationX1 = 0.0
+        animationY1 = 0.0
+        collectCoors = [-0.3, 0.3, -1.0, -0.8]
+        enemyInPlay = [true, true, true, true, true, true, true, true]
+        self.view.addSubview(theGame)
+        theMainMenu.removeFromSuperview()
+        pause = false
+        count = 0
     }
     
     

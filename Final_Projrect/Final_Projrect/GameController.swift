@@ -20,6 +20,9 @@ protocol ControlDelegate: class
     func stopMove()
     func startFire()
     func stopFire()
+    func pauseGame()
+    func unPauseGame()
+    func newGame()
 }
 
 class GameControl
@@ -27,7 +30,7 @@ class GameControl
     weak var delegate: ControlDelegate? = nil
     var theModel: GameModel? = nil
     
-    init(coors: Array<Float>, eCoors: Array<Float>){
+    init(coors: Array<Float>, eCoors: Array<Array<Float>>){
         theModel = GameModel(coors: coors, eCoors: eCoors)
     }
     
@@ -35,13 +38,17 @@ class GameControl
         theModel?.printCoords(coors: coors)
     }
     
-    func updateCoors(coors: Array<Float>, eCoors: Array<Float>){
+    func updateCoors(coors: Array<Float>, eCoors: Array<Array<Float>>){
         theModel?.updateCoors(coors: coors,  eCoors: eCoors)
     }
     
     func addGame()
     {
         delegate?.goToGame()
+    }
+    
+    func addNewGame(){
+        delegate?.newGame()
     }
     
     func addHigh()
@@ -86,8 +93,18 @@ class GameControl
         theModel?.bullets = bulletList
     }
     
-    func update() -> Array<Int>
+    func update() -> results
     {
         return (theModel?.update())!
+    }
+    
+    func pauseGame()
+    {
+         delegate?.pauseGame()
+    }
+    
+    func unPauseGame()
+    {
+        delegate?.unPauseGame()
     }
 }

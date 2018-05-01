@@ -30,7 +30,7 @@ class MainMenu:  UIView{
         NewGame.setTitle("New Game", for: .normal)
         NewGame.backgroundColor = .gray
         NewGame.setTitleColor(.black, for: .normal)
-        NewGame.addTarget(self, action: #selector(MainMenu.GoToGame(sender:)), for: .touchUpInside)
+        NewGame.addTarget(self, action: #selector(MainMenu.GoToNewGame(sender:)), for: .touchUpInside)
         self.addSubview(NewGame)
         
         Resume.setTitle("Resume Game", for: .normal)
@@ -53,6 +53,12 @@ class MainMenu:  UIView{
         theControl?.addGame()
 
     }
+    
+    @objc func GoToNewGame(sender: UIButton!) {
+        theControl?.addNewGame()
+        
+    }
+    
     @objc func GoToHighScore(sender: UIButton!) {
         theControl?.addHigh()
 
