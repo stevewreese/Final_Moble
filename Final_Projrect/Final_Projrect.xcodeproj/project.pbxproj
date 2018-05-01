@@ -10,9 +10,10 @@
 		9A3E2D2D2098E9F1004FB0C1 /* level1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A3E2D2C2098E9F1004FB0C1 /* level1.png */; };
 		9A3E2D2F2098EB72004FB0C1 /* level2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A3E2D2E2098EB72004FB0C1 /* level2.png */; };
 		9A3E2D312098F180004FB0C1 /* level3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A3E2D302098F180004FB0C1 /* level3.png */; };
+		9A3E2D332098F73F004FB0C1 /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E2D322098F73F004FB0C1 /* GameOver.swift */; };
+		9A3E2D35209911DC004FB0C1 /* playerShip.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A3E2D34209911DC004FB0C1 /* playerShip.png */; };
 		9A7E0F122076E944002EC2C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E0F112076E944002EC2C8 /* AppDelegate.swift */; };
 		9A7E0F192076E944002EC2C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A7E0F182076E944002EC2C8 /* Assets.xcassets */; };
-		9A7E0F242076EAC1002EC2C8 /* ViewHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E0F232076EAC1002EC2C8 /* ViewHolder.swift */; };
 		9A7E0F262076EE75002EC2C8 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E0F252076EE75002EC2C8 /* GameController.swift */; };
 		9A7E0F282076EE83002EC2C8 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E0F272076EE83002EC2C8 /* GameView.swift */; };
 		9A7E0F2A2076EF24002EC2C8 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E0F292076EF24002EC2C8 /* GameModel.swift */; };
@@ -28,11 +29,12 @@
 		9A3E2D2C2098E9F1004FB0C1 /* level1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level1.png; sourceTree = "<group>"; };
 		9A3E2D2E2098EB72004FB0C1 /* level2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level2.png; sourceTree = "<group>"; };
 		9A3E2D302098F180004FB0C1 /* level3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level3.png; sourceTree = "<group>"; };
+		9A3E2D322098F73F004FB0C1 /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		9A3E2D34209911DC004FB0C1 /* playerShip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playerShip.png; sourceTree = "<group>"; };
 		9A7E0F0E2076E944002EC2C8 /* Final_Projrect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Final_Projrect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A7E0F112076E944002EC2C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A7E0F182076E944002EC2C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A7E0F1D2076E944002EC2C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9A7E0F232076EAC1002EC2C8 /* ViewHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHolder.swift; sourceTree = "<group>"; };
 		9A7E0F252076EE75002EC2C8 /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		9A7E0F272076EE83002EC2C8 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		9A7E0F292076EF24002EC2C8 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
@@ -78,7 +80,6 @@
 				9A7E0F252076EE75002EC2C8 /* GameController.swift */,
 				9A7E0F182076E944002EC2C8 /* Assets.xcassets */,
 				9A7E0F1D2076E944002EC2C8 /* Info.plist */,
-				9A7E0F232076EAC1002EC2C8 /* ViewHolder.swift */,
 				9A7E0F272076EE83002EC2C8 /* GameView.swift */,
 				9A7E0F292076EF24002EC2C8 /* GameModel.swift */,
 				9A7E0F2B2076EF5E002EC2C8 /* MainMenu.swift */,
@@ -86,10 +87,12 @@
 				9AD59AAB20796F710005BEF4 /* playerShip.swift */,
 				9AD6E7DE208FFEDD006FC075 /* ViewController.swift */,
 				9A3E2D302098F180004FB0C1 /* level3.png */,
+				9A3E2D34209911DC004FB0C1 /* playerShip.png */,
 				9A3E2D2C2098E9F1004FB0C1 /* level1.png */,
 				9A3E2D2E2098EB72004FB0C1 /* level2.png */,
 				9AD6E7DC208FFED4006FC075 /* mars.png */,
 				9AD6E7DA208FFECB006FC075 /* pluto.png */,
+				9A3E2D322098F73F004FB0C1 /* GameOver.swift */,
 			);
 			path = Final_Projrect;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				9AD6E7DB208FFECB006FC075 /* pluto.png in Resources */,
 				9A3E2D312098F180004FB0C1 /* level3.png in Resources */,
 				9A7E0F192076E944002EC2C8 /* Assets.xcassets in Resources */,
+				9A3E2D35209911DC004FB0C1 /* playerShip.png in Resources */,
 				9A3E2D2D2098E9F1004FB0C1 /* level1.png in Resources */,
 				9AD6E7DD208FFED4006FC075 /* mars.png in Resources */,
 			);
@@ -172,8 +176,8 @@
 				9A7E0F2A2076EF24002EC2C8 /* GameModel.swift in Sources */,
 				9A7E0F2E2076EF70002EC2C8 /* HighScore.swift in Sources */,
 				9A7E0F2C2076EF5E002EC2C8 /* MainMenu.swift in Sources */,
+				9A3E2D332098F73F004FB0C1 /* GameOver.swift in Sources */,
 				9AD6E7DF208FFEDD006FC075 /* ViewController.swift in Sources */,
-				9A7E0F242076EAC1002EC2C8 /* ViewHolder.swift in Sources */,
 				9AD59AAC20796F710005BEF4 /* playerShip.swift in Sources */,
 				9A7E0F262076EE75002EC2C8 /* GameController.swift in Sources */,
 				9A7E0F282076EE83002EC2C8 /* GameView.swift in Sources */,

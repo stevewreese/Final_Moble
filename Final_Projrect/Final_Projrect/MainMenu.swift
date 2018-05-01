@@ -19,16 +19,20 @@ class MainMenu:  UIView{
     let Resume = UIButton(frame: CGRect(x: Int(UIScreen.main.bounds.width/2 - 100), y: 325, width: 150, height: 50))
     let HighScore = UIButton(frame: CGRect(x: Int(UIScreen.main.bounds.width/2 - 100), y: 400, width: 150, height: 50))
     
+    var resume = false
+    
     override init(frame: CGRect)
     {
         super.init(frame: frame)
-        let title = UILabel(frame: CGRect(x: UIScreen.main.bounds.width/2 - 100, y: 50, width: 200, height: 21))
-        title.text = "Place Title here"
-        title.textAlignment = NSTextAlignment.center
+        let title = UILabel(frame: CGRect(x: 60, y: 50, width: 500, height: 200))
+        title.text = "Space Wars"
+        title.font = title.font.withSize(50)
+        title.textColor = .white
+        //title.textAlignment = NSTextAlignment.center
         self.addSubview(title)
         
         NewGame.setTitle("New Game", for: .normal)
-        NewGame.backgroundColor = .gray
+        NewGame.backgroundColor = .white
         NewGame.setTitleColor(.black, for: .normal)
         NewGame.addTarget(self, action: #selector(MainMenu.GoToNewGame(sender:)), for: .touchUpInside)
         self.addSubview(NewGame)
@@ -41,7 +45,7 @@ class MainMenu:  UIView{
         self.addSubview(Resume)
         
         HighScore.setTitle("High Scores", for: .normal)
-        HighScore.backgroundColor = .gray
+        HighScore.backgroundColor = .white
         HighScore.setTitleColor(.black, for: .normal)
         HighScore.addTarget(self, action: #selector(MainMenu.GoToHighScore(sender:)), for: .touchUpInside)
         self.addSubview(HighScore)
@@ -50,12 +54,17 @@ class MainMenu:  UIView{
     }
     
     @objc func GoToGame(sender: UIButton!) {
-        theControl?.addGame()
+        if(resume)
+        {
+            theControl?.addGame()
+        }
+
 
     }
     
     @objc func GoToNewGame(sender: UIButton!) {
         theControl?.addNewGame()
+        whiteOut()
         
     }
     
@@ -66,6 +75,16 @@ class MainMenu:  UIView{
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func greyOut(){
+        Resume.backgroundColor = .gray
+        resume = false
+    }
+    
+    func whiteOut(){
+        Resume.backgroundColor = .white
+        resume = true
     }
     
 }

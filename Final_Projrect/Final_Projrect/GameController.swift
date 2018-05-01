@@ -107,4 +107,14 @@ class GameControl
     {
         delegate?.unPauseGame()
     }
+    
+    func checkScore(score: Int) -> Bool{
+        return (theModel?.checkScore(score: score))!
+    }
+    
+    func getHighScores() -> Array<highScore>
+    {
+        return (theModel?.getHighScores())!
+    }
+    
 }

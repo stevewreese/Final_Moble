@@ -12,10 +12,11 @@ class ViewController: GLKViewController, ControlDelegate{
 
     
     
-    
+    var winstate = GameOver(frame: UIScreen.main.bounds)
     var theGame: GameView = GameView(frame: UIScreen.main.bounds)
     var theHighScore: HighScore = HighScore(frame: UIScreen.main.bounds)
     var theMainMenu: MainMenu = MainMenu(frame: UIScreen.main.bounds)
+    
     
     enum level {case one, two, three}
     var theLevel: level = level.one
@@ -228,13 +229,10 @@ class ViewController: GLKViewController, ControlDelegate{
         
         theGame.theControl = theControl
         theHighScore.theControl = theControl
+        theHighScore.highScores = (theControl?.getHighScores())!
         theMainMenu.theControl = theControl
-        
-        //theHighScore.backgroundColor = .white
-        
-        theMainMenu.backgroundColor = .white
+        winstate.theControl = theControl
 
-        
         let glkView: GLKView = view as! GLKView
         glkView.context = EAGLContext(api: .openGLES2)!
         EAGLContext.setCurrent(glkView.context)
@@ -300,7 +298,7 @@ class ViewController: GLKViewController, ControlDelegate{
         
         glUniform1i(glGetUniformLocation(program, "textureUnit"), 0)
         
-        let marsTextureImage: UIImage = UIImage(named: "mars")!
+        let marsTextureImage: UIImage = UIImage(named: "playerShip")!
         marsTextureInfo = try! GLKTextureLoader.texture(with: marsTextureImage.cgImage!, options: [:])
         
         let plutoTextureImage: UIImage = UIImage(named: "pluto")!
@@ -435,6 +433,21 @@ class ViewController: GLKViewController, ControlDelegate{
                 animationX1 = 3
                 collectCoors[0] = 3
                 collectCoors[1] = 3
+
+                //winstate.isUserInteractionEnabled = true
+                theGame.removeFromSuperview()
+                if(theControl?.checkScore(score: score))!
+                {
+                    winstate.highScore = true
+                    theHighScore.highScores = (theControl?.getHighScores())!
+                    theHighScore.reload()
+                }
+                else{
+                    winstate.highScore = false
+                }
+                self.view.addSubview(winstate)
+                pause = true
+                theMainMenu.greyOut()
             }
  
             
@@ -605,7 +618,11 @@ class ViewController: GLKViewController, ControlDelegate{
                     }
                 }
                 else{
-                    print("win")
+
+                    theGame.removeFromSuperview()
+                    self.view.addSubview(winstate)
+                    pause = true
+                    theMainMenu.greyOut()
                 }
             }
         }
@@ -746,7 +763,7 @@ class ViewController: GLKViewController, ControlDelegate{
         
         var bullet: UIView = UIView(frame: CGRect(x: Int (x1 + (x2 - x1)/2), y: Int (y1 - 5), width: 2, height: 5))
         //
-        bullet.backgroundColor = UIColor.white
+        bullet.backgroundColor = UIColor.red
         theGame.addSubview(bullet)
         bulletList.append(bullet)
         
@@ -797,6 +814,8 @@ class ViewController: GLKViewController, ControlDelegate{
     
     func newGame(){
         let backgroundImage: UIImage = UIImage(named: "level1")!
+        theLevel = level.one
+        stage = 0
         backgroundTextureInfo = try! GLKTextureLoader.texture(with: backgroundImage.cgImage!, options: [:])
         popArray()
         animation = [Float](repeating: 0.0, count: 16)

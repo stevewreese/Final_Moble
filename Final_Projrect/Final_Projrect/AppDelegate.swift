@@ -11,15 +11,11 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    let rootView = ViewHolder()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow()
         window?.rootViewController = ViewController()
-        //rootView.backgroundColor = UIColor(white: 1, alpha: 0)
-        
-        //window?.rootViewController?.view = rootView
         window?.makeKeyAndVisible()
         return true
     }

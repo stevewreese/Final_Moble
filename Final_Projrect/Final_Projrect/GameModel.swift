@@ -13,6 +13,12 @@ struct results {
     var hit: Array<Int> = Array()
 }
 
+struct highScore{
+    let date = Date()
+    var score = 0
+}
+
+
 class GameModel{
     
     var timer = Timer()
@@ -22,6 +28,7 @@ class GameModel{
     var enemyCoordsXY: Array<Array<Float>> = Array()
     var shipCoordsXY: Array<Float> = Array()
     var bullets: Array<UIView>? = nil
+    var highScores: Array<highScore> = Array()
     
     func printCoords(coors: Array<Float>){
         for C in coors{
@@ -216,6 +223,39 @@ class GameModel{
         }
         
         return removeList
+    }
+    
+    func checkScore(score: Int) -> Bool{
+        if(score > 0)
+        {
+            var index = 0
+            for theScore in highScores{
+
+                if(score > theScore.score){
+                    var scoreElement = highScore()
+                    scoreElement.score = score
+                    highScores.insert(scoreElement, at: index)
+                    return true
+                }
+                index += 1
+            }
+            if(highScores.count < 10){
+                var scoreElement = highScore()
+                scoreElement.score = score
+                highScores.append(scoreElement)
+                return true
+            }
+            
+
+        }
+        return false
+
+
+    }
+    
+    func getHighScores() -> Array<highScore>
+    {
+        return highScores
     }
     
 

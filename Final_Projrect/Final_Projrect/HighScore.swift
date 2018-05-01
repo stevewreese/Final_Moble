@@ -17,6 +17,7 @@ class HighScore: UIView, UITableViewDelegate, UITableViewDataSource
     //get the sidth and height of phone
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
+    var highScores: Array<highScore> = Array()
     
     let main = UIButton(frame: CGRect(x: UIScreen.main.bounds.width
         - 100, y: 15, width: 100, height: 20))
@@ -54,7 +55,19 @@ class HighScore: UIView, UITableViewDelegate, UITableViewDataSource
         var cell:UITableViewCell!
         cell = tableView.dequeueReusableCell(withIdentifier: "ScoreCell", for: indexPath as IndexPath)
         var number = indexPath.row + 1;
-        cell.textLabel!.text = "\(number):"
+        if(highScores.count >= number)
+        {
+            let calendar = Calendar.current
+            let year = calendar.component(.year, from: highScores[indexPath.row].date as Date)
+            let month = calendar.component(.month, from: highScores[indexPath.row].date as Date)
+            let day = calendar.component(.day, from: highScores[indexPath.row].date as Date)
+
+            cell.textLabel!.text = "\(number): Score: \(highScores[indexPath.row].score) Date: \(month)-\(day)-\(year)"
+        }
+        else{
+            cell.textLabel!.text = "\(number):"
+        }
+
         return cell
     }
     
@@ -67,6 +80,11 @@ class HighScore: UIView, UITableViewDelegate, UITableViewDataSource
     @objc func toMain(sender: UIButton!) {
         theControl?.addMain()
         
+    }
+    
+    func reload()
+    {
+        scoreTable.reloadData()
     }
     
     
