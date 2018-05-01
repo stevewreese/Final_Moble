@@ -176,10 +176,25 @@ class GameModel{
                 
                 return hitList
             }
-            else if((shipCoordsXY[3] <= eCoors[2] && shipCoordsXY[3] >= eCoors[3]) && (shipCoordsXY[0] >= eCoors[0] && shipCoordsXY[0] <= eCoors[1]))
+            else if((eCoors[3] <= shipCoordsXY[2] && eCoors[3] >= shipCoordsXY[3]) && (eCoors[0] >= shipCoordsXY[0] && eCoors[0] <= shipCoordsXY[1]))
             {
                 hitList[0] = 1
                 hitList.append(index)
+                
+                return hitList
+            }
+            else if((eCoors[2] <= shipCoordsXY[2] && eCoors[2] >= shipCoordsXY[3]) && (eCoors[1] >= shipCoordsXY[0] && eCoors[1] <= shipCoordsXY[1]))
+            {
+                hitList[0] = 1
+                hitList.append(index)
+                
+                return hitList
+            }
+            else if((eCoors[3] <= shipCoordsXY[2] && eCoors[3] >= shipCoordsXY[3]) && (eCoors[1] >= shipCoordsXY[0] && eCoors[1] <= shipCoordsXY[1]))
+            {
+                hitList[0] = 1
+                hitList.append(index)
+                
                 return hitList
             }
             else{
@@ -205,7 +220,6 @@ class GameModel{
                 if(Int(b.frame.origin.y) <= Int(eCoors[2]) && Int(b.frame.origin.y) >= Int(eCoors[3])){
                     if(Int(b.frame.origin.x) >= Int(eCoors[0]) && Int(b.frame.origin.x) <= Int(eCoors[1]))
                     {
-                        print("hit")
                         removeList[0] = 1
                         removeList.append(indexB)
                         removeList.append(indexS)

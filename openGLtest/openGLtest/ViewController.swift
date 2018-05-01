@@ -132,72 +132,73 @@ class ViewController: GLKViewController, ControlDelegate{
     ]
     
     let triangleTextureCoordinateData: [Float] = [
+        1.0, 0.0,
         0.0, 0.0,
-        1.0, 0.0,
-        0.0, 1.0,
-        1.0, 0.0,
+        1.0, 1.0,
+        0.0, 0.0,
         1.0, 1.0,
         0.0, 1.0,
 
         //1
+        1.0, 0.0,
         0.0, 0.0,
-        1.0, 0.0,
-        0.0, 1.0,
-        1.0, 0.0,
+        1.0, 1.0,
+        0.0, 0.0,
         1.0, 1.0,
         0.0, 1.0,
+
         //2
         0.0, 1.0,
         1.0, 1.0,
-        1.0, 0.0,
-        0.0, 1.0,
-        1.0, 0.0,
         0.0, 0.0,
+        1.0, 1.0,
+        0.0, 0.0,
+        1.0, 0.0,
         //3
+        1.0, 0.0,
         0.0, 0.0,
-        1.0, 0.0,
-        0.0, 1.0,
-        1.0, 0.0,
+        1.0, 1.0,
+        0.0, 0.0,
         1.0, 1.0,
         0.0, 1.0,
         //4
         0.0, 1.0,
         1.0, 1.0,
-        1.0, 0.0,
-        0.0, 1.0,
-        1.0, 0.0,
         0.0, 0.0,
+        1.0, 1.0,
+        0.0, 0.0,
+        1.0, 0.0,
         //5
         0.0, 1.0,
         1.0, 1.0,
-        1.0, 0.0,
-        0.0, 1.0,
-        1.0, 0.0,
         0.0, 0.0,
+        1.0, 1.0,
+        0.0, 0.0,
+        1.0, 0.0,
 
         //6
+        1.0, 0.0,
         0.0, 0.0,
-        1.0, 0.0,
-        0.0, 1.0,
-        1.0, 0.0,
+        1.0, 1.0,
+        0.0, 0.0,
         1.0, 1.0,
         0.0, 1.0,
         
         //7
+        1.0, 0.0,
         0.0, 0.0,
-        1.0, 0.0,
-        0.0, 1.0,
-        1.0, 0.0,
+        1.0, 1.0,
+        0.0, 0.0,
         1.0, 1.0,
         0.0, 1.0,
         
         //8
         0.0, 1.0,
         1.0, 1.0,
-        1.0, 0.0,
-        0.0, 1.0,
-        1.0, 0.0,
         0.0, 0.0,
+        1.0, 1.0,
+        0.0, 0.0,
+        1.0, 0.0,
         
         1.0, 1.0,
         0.0, 1.0,
@@ -301,14 +302,14 @@ class ViewController: GLKViewController, ControlDelegate{
         let marsTextureImage: UIImage = UIImage(named: "playerShip")!
         marsTextureInfo = try! GLKTextureLoader.texture(with: marsTextureImage.cgImage!, options: [:])
         
-        let plutoTextureImage: UIImage = UIImage(named: "pluto")!
+        let plutoTextureImage: UIImage = UIImage(named: "eShip")!
         plutoTextureInfo = try! GLKTextureLoader.texture(with: plutoTextureImage.cgImage!, options: [:])
         
         let backgroundImage: UIImage = UIImage(named: "level1")!
         backgroundTextureInfo = try! GLKTextureLoader.texture(with: backgroundImage.cgImage!, options: [:])
         
         
-        glClearColor(0.0, 0.0, 0.0, 0.0)
+        glClearColor(0.0, 0.0, 0.0, 1.0)
         
         self.view.addSubview(theMainMenu)
         
