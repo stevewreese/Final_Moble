@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.582182"
+            timestampString = "546893977.470167"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "652"
-            endingLineNumber = "652"
+            startingLineNumber = "697"
+            endingLineNumber = "697"
             landmarkName = "stopMove()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.583009"
+            timestampString = "546893977.470628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "632"
-            endingLineNumber = "632"
+            startingLineNumber = "677"
+            endingLineNumber = "677"
             landmarkName = "moveUp()"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.5840091"
+            timestampString = "546893977.4710571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "668"
-            endingLineNumber = "668"
+            startingLineNumber = "713"
+            endingLineNumber = "713"
             landmarkName = "unPauseGame()"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.584574"
+            timestampString = "546893977.471368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
+            startingLineNumber = "424"
+            endingLineNumber = "424"
             landmarkName = "glkView(_:drawIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.585416"
+            timestampString = "546893977.471741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.586092"
+            timestampString = "546893977.472121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "449"
-            endingLineNumber = "449"
+            startingLineNumber = "473"
+            endingLineNumber = "473"
             landmarkName = "glkView(_:drawIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -330,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.586556"
+            timestampString = "546893977.472442"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -346,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.5868911"
+            timestampString = "546893977.472749"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.5872231"
+            timestampString = "546893977.473055"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "605"
-            endingLineNumber = "605"
+            startingLineNumber = "562"
+            endingLineNumber = "562"
             landmarkName = "glkView(_:drawIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -378,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.587548"
+            timestampString = "546893977.473362"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "541"
-            endingLineNumber = "541"
+            startingLineNumber = "445"
+            endingLineNumber = "445"
             landmarkName = "glkView(_:drawIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -394,11 +394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.587883"
+            timestampString = "546893977.473662"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "423"
-            endingLineNumber = "423"
+            startingLineNumber = "553"
+            endingLineNumber = "553"
             landmarkName = "glkView(_:drawIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -410,11 +410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.588167"
+            timestampString = "546893977.4739619"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "532"
-            endingLineNumber = "532"
+            startingLineNumber = "461"
+            endingLineNumber = "461"
             landmarkName = "glkView(_:drawIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -426,11 +426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.588443"
+            timestampString = "546893977.474262"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "437"
-            endingLineNumber = "437"
+            startingLineNumber = "455"
+            endingLineNumber = "455"
             landmarkName = "glkView(_:drawIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -442,27 +442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.588724"
+            timestampString = "546893977.474561"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "431"
-            endingLineNumber = "431"
-            landmarkName = "glkView(_:drawIn:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.589"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "727"
-            endingLineNumber = "727"
+            startingLineNumber = "771"
+            endingLineNumber = "771"
             landmarkName = "popArray()"
             landmarkType = "7">
          </BreakpointContent>
@@ -474,11 +458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.5893151"
+            timestampString = "546893977.4748681"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "432"
-            endingLineNumber = "432"
+            startingLineNumber = "456"
+            endingLineNumber = "456"
             landmarkName = "glkView(_:drawIn:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -490,11 +474,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../openGLtest/openGLtest/ViewController.swift"
-            timestampString = "546840435.589632"
+            timestampString = "546893977.475172"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
+            startingLineNumber = "469"
+            endingLineNumber = "469"
+            landmarkName = "glkView(_:drawIn:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../openGLtest/openGLtest/ViewController.swift"
+            timestampString = "546893977.475464"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "602"
+            endingLineNumber = "602"
             landmarkName = "glkView(_:drawIn:)"
             landmarkType = "7">
          </BreakpointContent>

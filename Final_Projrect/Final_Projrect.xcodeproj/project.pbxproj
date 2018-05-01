@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A3E2D2D2098E9F1004FB0C1 /* level1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A3E2D2C2098E9F1004FB0C1 /* level1.png */; };
+		9A3E2D2F2098EB72004FB0C1 /* level2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A3E2D2E2098EB72004FB0C1 /* level2.png */; };
+		9A3E2D312098F180004FB0C1 /* level3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9A3E2D302098F180004FB0C1 /* level3.png */; };
 		9A7E0F122076E944002EC2C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E0F112076E944002EC2C8 /* AppDelegate.swift */; };
 		9A7E0F192076E944002EC2C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A7E0F182076E944002EC2C8 /* Assets.xcassets */; };
 		9A7E0F242076EAC1002EC2C8 /* ViewHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E0F232076EAC1002EC2C8 /* ViewHolder.swift */; };
@@ -22,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A3E2D2C2098E9F1004FB0C1 /* level1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level1.png; sourceTree = "<group>"; };
+		9A3E2D2E2098EB72004FB0C1 /* level2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level2.png; sourceTree = "<group>"; };
+		9A3E2D302098F180004FB0C1 /* level3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level3.png; sourceTree = "<group>"; };
 		9A7E0F0E2076E944002EC2C8 /* Final_Projrect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Final_Projrect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A7E0F112076E944002EC2C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A7E0F182076E944002EC2C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,6 +85,9 @@
 				9A7E0F2D2076EF70002EC2C8 /* HighScore.swift */,
 				9AD59AAB20796F710005BEF4 /* playerShip.swift */,
 				9AD6E7DE208FFEDD006FC075 /* ViewController.swift */,
+				9A3E2D302098F180004FB0C1 /* level3.png */,
+				9A3E2D2C2098E9F1004FB0C1 /* level1.png */,
+				9A3E2D2E2098EB72004FB0C1 /* level2.png */,
 				9AD6E7DC208FFED4006FC075 /* mars.png */,
 				9AD6E7DA208FFECB006FC075 /* pluto.png */,
 			);
@@ -144,8 +153,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A3E2D2F2098EB72004FB0C1 /* level2.png in Resources */,
 				9AD6E7DB208FFECB006FC075 /* pluto.png in Resources */,
+				9A3E2D312098F180004FB0C1 /* level3.png in Resources */,
 				9A7E0F192076E944002EC2C8 /* Assets.xcassets in Resources */,
+				9A3E2D2D2098E9F1004FB0C1 /* level1.png in Resources */,
 				9AD6E7DD208FFED4006FC075 /* mars.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

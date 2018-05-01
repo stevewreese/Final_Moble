@@ -58,11 +58,12 @@ class GameView: UIView{
         
         scoreLabel.text = "Score: 0"
         scoreLabel.textAlignment = NSTextAlignment.center
+        scoreLabel.textColor = .white
         self.addSubview(scoreLabel)
         
         
         left.backgroundColor = UIColor(white: 1, alpha: 0)
-        left.setTitleColor(.black, for: .normal)
+        left.setTitleColor(.white, for: .normal)
         left.setTitle("<", for: .normal)
         left.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
         left.addTarget(self, action: #selector(GameView.moveLeft(sender:)), for: .touchDown)
@@ -70,7 +71,7 @@ class GameView: UIView{
         self.addSubview(left)
         
         right.backgroundColor = UIColor(white: 1, alpha: 0)
-        right.setTitleColor(.black, for: .normal)
+        right.setTitleColor(.white, for: .normal)
         right.setTitle(">", for: .normal)
         right.addTarget(self, action: #selector(GameView.moveRight(sender:)), for: .touchDown)
         right.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
@@ -78,7 +79,7 @@ class GameView: UIView{
         self.addSubview(right)
         
         up.backgroundColor = UIColor(white: 1, alpha: 0)
-        up.setTitleColor(.black, for: .normal)
+        up.setTitleColor(.white, for: .normal)
         up.setTitle("up", for: .normal)
         up.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
         up.addTarget(self, action: #selector(GameView.moveUp(sender:)), for: .touchDown)
@@ -86,7 +87,7 @@ class GameView: UIView{
         self.addSubview(up)
         
         down.backgroundColor = UIColor(white: 1, alpha: 0)
-        down.setTitleColor(.black, for: .normal)
+        down.setTitleColor(.white, for: .normal)
         down.setTitle("down", for: .normal)
         down.addTarget(self, action: #selector(GameView.moveDown(sender:)), for: .touchDown)
         down.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
@@ -94,7 +95,7 @@ class GameView: UIView{
         self.addSubview(down)
         
         fire.backgroundColor = UIColor(white: 1, alpha: 0)
-        fire.setTitleColor(.black, for: .normal)
+        fire.setTitleColor(.white, for: .normal)
         fire.setTitle("fire", for: .normal)
         fire.addTarget(self, action: #selector(GameView.fireBullet(sender:)), for: .touchDown)
         fire.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
@@ -103,14 +104,14 @@ class GameView: UIView{
         
         
         main.backgroundColor = .gray
-        main.setTitleColor(.black, for: .normal)
+        main.setTitleColor(.white, for: .normal)
         main.setTitle("Main Menu", for: .normal)
         main.addTarget(self, action: #selector(GameView.toMain(sender:)), for: .touchUpInside)
         
         self.addSubview(main)
         
         pause.backgroundColor = .gray
-        pause.setTitleColor(.black, for: .normal)
+        pause.setTitleColor(.white, for: .normal)
         pause.setTitle("pause", for: .normal)
         pause.addTarget(self, action: #selector(GameView.pause(sender:)), for: .touchUpInside)
         

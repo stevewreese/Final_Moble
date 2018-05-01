@@ -36,11 +36,15 @@ class ViewController: GLKViewController, ControlDelegate{
     var bulletList: Array<UIView> = Array()
     var enemyInPlay: Array<Bool> = [true, true, true, true, true, true, true, true]
     var animation: Array<Float> = [Float](repeating: 0.0, count: 16)
+    var timing: Array<Int> = [0, 120, 70, 180, 200, 260, 300, 360]
     
     var theControl: GameControl? = nil
     var gameProgGreen: UIView? = nil
     var lifeBar = 100
     var score = 0
+    var stage = 0
+    var speed : Float = 0.003
+    var damage = 10
 
     
     let triangleData: [Float] = [
@@ -115,6 +119,12 @@ class ViewController: GLKViewController, ControlDelegate{
         -0.8, -1.0,
         -1.0, -1.0,
         
+        1.0, -1.0,
+        -1.0, -1.0,
+        +1.0, 1.0,
+        -1.0, -1.0,
+        +1.0, 1.0,
+        -1.0, 1.0,
        
        
     ]
@@ -186,12 +196,19 @@ class ViewController: GLKViewController, ControlDelegate{
         0.0, 1.0,
         1.0, 0.0,
         0.0, 0.0,
+        
+        1.0, 1.0,
+        0.0, 1.0,
+        1.0, 0.0,
+        0.0, 1.0,
+        1.0, 0.0,
+        0.0, 0.0
 
     ]
     
     var marsTextureInfo: GLKTextureInfo? = nil
     var plutoTextureInfo: GLKTextureInfo? = nil
-    var plutoTextureInfo2: GLKTextureInfo? = nil
+    var backgroundTextureInfo: GLKTextureInfo? = nil
     
     var program: GLuint = 0
     var animationX1: Float = 0.0
@@ -211,10 +228,11 @@ class ViewController: GLKViewController, ControlDelegate{
         theGame.theControl = theControl
         theHighScore.theControl = theControl
         theMainMenu.theControl = theControl
+        view.backgroundColor = UIColor(patternImage: UIImage(named: "level1")!)
         
         //theHighScore.backgroundColor = .white
         
-        //theMainMenu.backgroundColor = .white
+        theMainMenu.backgroundColor = .white
 
         
         let glkView: GLKView = view as! GLKView
@@ -288,11 +306,11 @@ class ViewController: GLKViewController, ControlDelegate{
         let plutoTextureImage: UIImage = UIImage(named: "pluto")!
         plutoTextureInfo = try! GLKTextureLoader.texture(with: plutoTextureImage.cgImage!, options: [:])
         
-        let plutoTextureImage2: UIImage = UIImage(named: "pluto")!
-        plutoTextureInfo2 = try! GLKTextureLoader.texture(with: plutoTextureImage2.cgImage!, options: [:])
+        let backgroundImage: UIImage = UIImage(named: "level1")!
+        backgroundTextureInfo = try! GLKTextureLoader.texture(with: backgroundImage.cgImage!, options: [:])
         
         
-        glClearColor(1.0, 0.0, 0.0, 0.0)
+        glClearColor(0.0, 0.0, 0.0, 0.0)
         
         self.view.addSubview(theMainMenu)
         
@@ -399,7 +417,7 @@ class ViewController: GLKViewController, ControlDelegate{
             
             if(theResuts.hit[0] == 1){
                 enemyHit(index: theResuts.hit[1])
-                lifeBar -= 1
+                lifeBar -= damage
             }
             if(lifeBar >= 0)
             {
@@ -410,6 +428,10 @@ class ViewController: GLKViewController, ControlDelegate{
 
             }
             else{
+                gameProgGreen?.removeFromSuperview()
+                gameProgGreen = UIView(frame: CGRect(x: 200, y: 50, width: 0, height: 5))
+                gameProgGreen?.backgroundColor = .green
+                theGame.addSubview(gameProgGreen!)
                 animationX1 = 3
                 collectCoors[0] = 3
                 collectCoors[1] = 3
@@ -422,12 +444,14 @@ class ViewController: GLKViewController, ControlDelegate{
             
             var enIndex = 0
             
-            if(count >= 0 && enemyInPlay[enIndex])
+            
+            
+            if(count >= timing[enIndex] && enemyInPlay[enIndex])
             {
             
-                animation[enIndex*2 + 1] -= 0.005
-                enemyCoors[enIndex][2] -= 0.005
-                enemyCoors[enIndex][3] -= 0.005
+                animation[enIndex*2 + 1] -= speed
+                enemyCoors[enIndex][2] -= speed
+                enemyCoors[enIndex][3] -= speed
                 if(enemyCoors[enIndex][2] < -1.1){
                     enemyInPlay[enIndex] = false
                 }
@@ -436,11 +460,11 @@ class ViewController: GLKViewController, ControlDelegate{
             
             enIndex += 1
             
-            if(count >= 120 && enemyInPlay[enIndex])
+            if(count >= timing[enIndex] && enemyInPlay[enIndex])
             {
-                animation[enIndex*2 + 1] += 0.005
-                enemyCoors[enIndex][2] += 0.005
-                enemyCoors[enIndex][3] += 0.005
+                animation[enIndex*2 + 1] += speed
+                enemyCoors[enIndex][2] += speed
+                enemyCoors[enIndex][3] += speed
                 if(enemyCoors[enIndex][2] > 1){
                     enemyInPlay[enIndex] = false
                 }
@@ -450,24 +474,26 @@ class ViewController: GLKViewController, ControlDelegate{
             
             enIndex += 1
             
-            if(count >= 30 && enemyInPlay[enIndex])
+            
+            
+            if(count >= timing[enIndex] && enemyInPlay[enIndex])
             {
                 
-                animation[enIndex*2 + 1] -= 0.005
-                enemyCoors[enIndex][2] -= 0.005
-                enemyCoors[enIndex][3] -= 0.005
+                animation[enIndex*2 + 1] -= speed
+                enemyCoors[enIndex][2] -= speed
+                enemyCoors[enIndex][3] -= speed
                 if(enemyCoors[enIndex][3] < -1.1){
                     enemyInPlay[enIndex] = false
                 }
             }
             
             enIndex += 1
-            
-            if(count >= 180 && enemyInPlay[enIndex])
+        
+            if(count >= timing[enIndex] && enemyInPlay[enIndex])
             {
-                animation[enIndex*2 + 1] += 0.005
-                enemyCoors[enIndex][2] += 0.005
-                enemyCoors[enIndex][3] += 0.005
+                animation[enIndex*2 + 1] += speed
+                enemyCoors[enIndex][2] += speed
+                enemyCoors[enIndex][3] += speed
                 if(enemyCoors[enIndex][2] > 1){
                     enemyInPlay[enIndex] = false
                 }
@@ -475,49 +501,44 @@ class ViewController: GLKViewController, ControlDelegate{
             
             enIndex += 1
             
-            
-
-            
-            if(count >= 60 && enemyInPlay[enIndex])
+            if(count >= timing[enIndex] && enemyInPlay[enIndex])
             {
-                animation[enIndex*2] -= 0.005
-                animation[enIndex*2 + 1] += 0.005
-                enemyCoors[enIndex][0] += -0.005
-                enemyCoors[enIndex][1] += -0.005
-                enemyCoors[enIndex][2] += 0.005
-                enemyCoors[enIndex][3] += 0.005
+                animation[enIndex*2] -= speed
+                animation[enIndex*2 + 1] += speed
+                enemyCoors[enIndex][0] += -speed
+                enemyCoors[enIndex][1] += -speed
+                enemyCoors[enIndex][2] += speed
+                enemyCoors[enIndex][3] += speed
                 if(enemyCoors[enIndex][2] > 1.2 || enemyCoors[enIndex][0] < -1.2){
                     enemyInPlay[enIndex] = false
                 }
                 
             }
             enIndex += 1
-            
 
-            
-            if(count >= 120 && enemyInPlay[enIndex])
+            if(count >= timing[enIndex] && enemyInPlay[enIndex])
             {
-                animation[enIndex*2] += 0.005
-                animation[enIndex*2 + 1] -= 0.005
-                enemyCoors[enIndex][0] += 0.005
-                enemyCoors[enIndex][1] += 0.005
-                enemyCoors[enIndex][2] += -0.005
-                enemyCoors[enIndex][3] += -0.005
+                animation[enIndex*2] += speed
+                animation[enIndex*2 + 1] -= speed
+                enemyCoors[enIndex][0] += speed
+                enemyCoors[enIndex][1] += speed
+                enemyCoors[enIndex][2] += -speed
+                enemyCoors[enIndex][3] += -speed
                 if(enemyCoors[enIndex][2] < -1.2 || enemyCoors[enIndex][0] > 1.2){
                     enemyInPlay[enIndex] = false
                 }
-                
-                
+ 
             }
+            
             enIndex += 1
-            if(count >= 200 && enemyInPlay[enIndex])
+            if(count >= timing[enIndex] && enemyInPlay[enIndex])
             {
-                animation[enIndex*2] -= 0.005
-                animation[enIndex*2 + 1] -= 0.005
-                enemyCoors[enIndex][0] += -0.005
-                enemyCoors[enIndex][1] += -0.005
-                enemyCoors[enIndex][2] += -0.005
-                enemyCoors[enIndex][3] += -0.005
+                animation[enIndex*2] -= speed
+                animation[enIndex*2 + 1] -= speed
+                enemyCoors[enIndex][0] += -speed
+                enemyCoors[enIndex][1] += -speed
+                enemyCoors[enIndex][2] += -speed
+                enemyCoors[enIndex][3] += -speed
                 if(enemyCoors[enIndex][3] < -1.2 || enemyCoors[enIndex][0] < -1.2){
                     enemyInPlay[enIndex] = false
                 }
@@ -526,15 +547,15 @@ class ViewController: GLKViewController, ControlDelegate{
             }
             enIndex += 1
             
-            if(count >= 120 && enemyInPlay[enIndex])
+            if(count >= timing[enIndex] && enemyInPlay[enIndex])
             {
-                animation[enIndex*2] += 0.005
-                animation[enIndex*2 + 1] += 0.005
+                animation[enIndex*2] += speed
+                animation[enIndex*2 + 1] += speed
                 
-                enemyCoors[enIndex][0] += 0.005
-                enemyCoors[enIndex][1] += 0.005
-                enemyCoors[enIndex][2] += 0.005
-                enemyCoors[enIndex][3] += 0.005
+                enemyCoors[enIndex][0] += speed
+                enemyCoors[enIndex][1] += speed
+                enemyCoors[enIndex][2] += speed
+                enemyCoors[enIndex][3] += speed
                 if(enemyCoors[enIndex][2] > 1.2 || enemyCoors[enIndex][0] > 1.2){
                     enemyInPlay[enIndex] = false
                 }
@@ -545,23 +566,53 @@ class ViewController: GLKViewController, ControlDelegate{
                 
                 if(theLevel == level.one)
                 {
+                    let backgroundImage: UIImage = UIImage(named: "level2")!
+                    backgroundTextureInfo = try! GLKTextureLoader.texture(with: backgroundImage.cgImage!, options: [:])
+
                     newLevel()
-                    theLevel = level.two
+                    speed = 0.006
+                    damage = 15
+                    if(stage == 0)
+                    {
+                        stage += 1
+                    }
+                    else{
+                        stage = 0
+                        timing = [300, 0, 30, 200, 260, 180, 120, 70]
+                        theLevel = level.two
+                    }
+
                 }
                 else if(theLevel == level.two)
                 {
                     newLevel()
-                    theLevel = level.three
+                    let backgroundImage: UIImage = UIImage(named: "level3")!
+                    backgroundTextureInfo = try! GLKTextureLoader.texture(with: backgroundImage.cgImage!, options: [:])
+                    speed = 0.012
+                    damage = 20
+                    if(stage == 0)
+                    {
+                        timing = [0, 120, 70, 180, 200, 260, 300, 360]
+                        stage += 1
+                    }
+                    else if(stage == 1){
+                        timing = [300, 0, 30, 200, 260, 180, 120, 70]
+                        stage += 1
+                    }
+                    else{
+                        timing = [100, 50, 30, 170, 230, 200, 120, 0]
+                        theLevel = level.three
+                    }
                 }
                 else{
                     print("win")
                 }
             }
-            
-            
-
-            
         }
+        
+        glBindTexture(GLenum(GL_TEXTURE_2D), backgroundTextureInfo!.name)
+        glUniform2f(glGetUniformLocation(program, "translate"), 0.0, 0.0)
+        glDrawArrays(GLenum(GL_TRIANGLES), 54, 6)
         
         glBindTexture(GLenum(GL_TEXTURE_2D), marsTextureInfo!.name)
         glUniform2f(glGetUniformLocation(program, "translate"), animationX1, animationY1)
@@ -599,10 +650,6 @@ class ViewController: GLKViewController, ControlDelegate{
         glBindTexture(GLenum(GL_TEXTURE_2D), plutoTextureInfo!.name)
         glUniform2f(glGetUniformLocation(program, "translate"), animation[14], animation[15])
         glDrawArrays(GLenum(GL_TRIANGLES), 48, 6)
-        
-        
- 
-
 
     }
     
@@ -699,7 +746,7 @@ class ViewController: GLKViewController, ControlDelegate{
         
         var bullet: UIView = UIView(frame: CGRect(x: Int (x1 + (x2 - x1)/2), y: Int (y1 - 5), width: 2, height: 5))
         //
-        bullet.backgroundColor = UIColor.black
+        bullet.backgroundColor = UIColor.white
         theGame.addSubview(bullet)
         bulletList.append(bullet)
         
@@ -709,7 +756,6 @@ class ViewController: GLKViewController, ControlDelegate{
     
     func popArray(){
         enemyCoors.removeAll()
-        var numberOfEnemies = 8
         var index = 0
         var theIndex = 14
         while(index < 8){
@@ -752,6 +798,7 @@ class ViewController: GLKViewController, ControlDelegate{
     func newGame(){
         popArray()
         animation = [Float](repeating: 0.0, count: 16)
+        timing = [0, 120, 70, 180, 200, 260, 300, 360]
         animationX1 = 0.0
         animationY1 = 0.0
         collectCoors = [-0.3, 0.3, -1.0, -0.8]
@@ -761,6 +808,8 @@ class ViewController: GLKViewController, ControlDelegate{
         pause = false
         count = 0
         lifeBar = 100
+        speed = 0.003
+        damage = 10
         score = 0
         theGame.setScore(score: score)
         for b in bulletList{
