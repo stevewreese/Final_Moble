@@ -30,12 +30,6 @@ class GameModel{
     var bullets: Array<UIView>? = nil
     var highScores: Array<highScore> = Array()
     
-    func printCoords(coors: Array<Float>){
-        for C in coors{
-            print("\(C)")
-        }
-    }
-    
     init(coors: Array<Float>, eCoors: Array<Array<Float>>){
         //timer = Timer.scheduledTimer(timeInterval: 0.01667, target: self,   selector: (#selector(GameModel.update)), userInfo: nil, repeats: true)
         shipCoords = coors
