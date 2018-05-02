@@ -1,7 +1,7 @@
 //
 //  GameOver.swift
 //  Final_Projrect
-//
+//  the gameover view
 //  Created by Stephen Reese on 5/1/18.
 //  Copyright © 2018 Stephen Reese. All rights reserved.
 //
@@ -27,7 +27,7 @@ class GameOver: UIView{
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    //touch screen to go to high score or main screen
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.removeFromSuperview()
         if(highScore){

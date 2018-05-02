@@ -1,7 +1,7 @@
 //
 //  MainMenu.swift
 //  Final_Projrect
-//
+//  the main menu view
 //  Created by Stephen Reese on 4/5/18.
 //  Copyright © 2018 Stephen Reese. All rights reserved.
 //
@@ -15,6 +15,7 @@ class MainMenu:  UIView{
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
     
+    //buttons to go to game
     let NewGame = UIButton(frame: CGRect(x: Int(UIScreen.main.bounds.width/2 - 100), y: 250, width: 150, height: 50))
     let Resume = UIButton(frame: CGRect(x: Int(UIScreen.main.bounds.width/2 - 100), y: 325, width: 150, height: 50))
     let HighScore = UIButton(frame: CGRect(x: Int(UIScreen.main.bounds.width/2 - 100), y: 400, width: 150, height: 50))
@@ -28,7 +29,6 @@ class MainMenu:  UIView{
         title.text = "Space Wars"
         title.font = title.font.withSize(50)
         title.textColor = .white
-        //title.textAlignment = NSTextAlignment.center
         self.addSubview(title)
         
         NewGame.setTitle("New Game", for: .normal)
@@ -41,7 +41,6 @@ class MainMenu:  UIView{
         Resume.backgroundColor = .gray
         Resume.setTitleColor(.black, for: .normal)
         Resume.addTarget(self, action: #selector(MainMenu.GoToGame(sender:)), for: .touchUpInside)
-        //NewGame.addTarget(self, action: #selector(GameView.up(sender:)), for: .touchUpInside)
         self.addSubview(Resume)
         
         HighScore.setTitle("High Scores", for: .normal)
@@ -52,7 +51,7 @@ class MainMenu:  UIView{
         
 
     }
-    
+    //resume game
     @objc func GoToGame(sender: UIButton!) {
         if(resume)
         {
@@ -61,13 +60,14 @@ class MainMenu:  UIView{
 
 
     }
-    
+    //make new game
     @objc func GoToNewGame(sender: UIButton!) {
         theControl?.addNewGame()
+        //make resume button pressable
         whiteOut()
         
     }
-    
+    //go to highscores
     @objc func GoToHighScore(sender: UIButton!) {
         theControl?.addHigh()
 
@@ -76,12 +76,12 @@ class MainMenu:  UIView{
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    //disable resume button
     func greyOut(){
         Resume.backgroundColor = .gray
         resume = false
     }
-    
+    //enable resum button
     func whiteOut(){
         Resume.backgroundColor = .white
         resume = true

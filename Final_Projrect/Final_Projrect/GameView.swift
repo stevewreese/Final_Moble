@@ -12,6 +12,7 @@ class GameView: UIView{
     
     var theControl: GameControl? = nil
     
+    //buttons for the game
     let left = UIButton(frame: CGRect(x: 250, y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50))
     let right = UIButton(frame: CGRect(x: 350, y: Int(UIScreen.main.bounds.height - 100), width: 50, height: 50))
     let up = UIButton(frame: CGRect(x: 300, y: Int(UIScreen.main.bounds.height - 150), width: 50, height: 50))
@@ -20,15 +21,15 @@ class GameView: UIView{
     let main = UIButton(frame: CGRect(x: UIScreen.main.bounds.width
         - 100, y: 15, width: 100, height: 20))
     let pause = UIButton(frame: CGRect(x: 15, y: 15, width: 100, height: 20))
-    
+    //text for the score
     var scoreLabel: UILabel = UILabel(frame: CGRect(x: UIScreen.main.bounds.width/2 - 100, y: 20, width: 200, height: 21))
-    
+    //color for button when pressed
     var theBlue = UIColor(red: CGFloat(0), green: CGFloat(0), blue: CGFloat(1.0), alpha: CGFloat(0.5))
     
     override init(frame: CGRect)
     {
         super.init(frame: frame)
-        
+        //add labels and buttons
         scoreLabel.text = "Score: 0"
         scoreLabel.textAlignment = NSTextAlignment.center
         scoreLabel.textColor = .white
@@ -96,7 +97,7 @@ class GameView: UIView{
         fatalError("init(coder:) has not been implemented")
     }
 
-    
+    //control function for movement
     @objc func moveLeft(sender: UIButton!){
         sender.backgroundColor = theBlue
 
@@ -125,7 +126,9 @@ class GameView: UIView{
         theControl?.moveUp()
         
     }
+    //end control functions for movement
     
+    //behavor when a play stops pressing the button
     @objc func up(sender: UIButton!){
         sender.backgroundColor = UIColor(white: 0, alpha: 0.2)
         
@@ -136,22 +139,18 @@ class GameView: UIView{
         else{
             theControl?.stop()
         }
-        
-
     }
     
+    //function to fire
     @objc func fireBullet(sender: UIButton!){
         sender.backgroundColor = theBlue
         theControl?.startFire()
-
-        
     }
-    
+    //function to go to main
     @objc func toMain(sender: UIButton!) {
         theControl?.addMain()
-        
     }
-    
+    //funciton to (un)pause
     @objc func pause(sender: UIButton!) {
         if(sender.titleLabel?.text == "pause")
         {
@@ -166,7 +165,7 @@ class GameView: UIView{
         }
 
     }
-    
+    //set the label score 
     func setScore(score: Int){
         scoreLabel.text = "Score: \(score)"
     }

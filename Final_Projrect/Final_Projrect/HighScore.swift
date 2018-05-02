@@ -1,7 +1,7 @@
 //
 //  HighScore.swift
 //  Final_Projrect
-//
+//  the highscore view
 //  Created by Stephen Reese on 4/5/18.
 //  Copyright © 2018 Stephen Reese. All rights reserved.
 //
@@ -57,6 +57,7 @@ class HighScore: UIView, UITableViewDelegate, UITableViewDataSource
         var number = indexPath.row + 1;
         if(highScores.count >= number)
         {
+            //get month year and month and day of the calendar
             let calendar = Calendar.current
             let year = calendar.component(.year, from: highScores[indexPath.row].date as Date)
             let month = calendar.component(.month, from: highScores[indexPath.row].date as Date)
@@ -70,18 +71,18 @@ class HighScore: UIView, UITableViewDelegate, UITableViewDataSource
 
         return cell
     }
-    
+    //table title
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
         return "HIGH SCORES"
 
     }
-    
+    //go to main
     @objc func toMain(sender: UIButton!) {
         theControl?.addMain()
         
     }
-    
+    //reset the data
     func reload()
     {
         scoreTable.reloadData()

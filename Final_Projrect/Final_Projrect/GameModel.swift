@@ -1,43 +1,45 @@
 //
 //  GameModel.swift
 //  Final_Projrect
-//
+//  the game model
 //  Created by Stephen Reese on 4/5/18.
 //  Copyright © 2018 Stephen Reese. All rights reserved.
 //
 
 import UIKit
-
+//struct to control the result when an emeny is hit by a bullet
 struct results {
     var removelist: Array<Int> = Array()
     var hit: Array<Int> = Array()
 }
-
+//struct pass the highscore information
 struct highScore{
     let date = Date()
     var score = 0
 }
 
-
 class GameModel{
-    
-    var timer = Timer()
-    
+    //the ship and enemy ship coordinates in opengl
     var shipCoords: Array<Float>? = nil
     var enemyCoords: Array<Array<Float>>? = nil
+    //the ship and enemy ship coordinates in Iphone coordinates
     var enemyCoordsXY: Array<Array<Float>> = Array()
     var shipCoordsXY: Array<Float> = Array()
+    //the bullet coordinates
     var bullets: Array<UIView>? = nil
+    //the list of the highscores
     var highScores: Array<highScore> = Array()
     
     init(coors: Array<Float>, eCoors: Array<Array<Float>>){
-        //timer = Timer.scheduledTimer(timeInterval: 0.01667, target: self,   selector: (#selector(GameModel.update)), userInfo: nil, repeats: true)
+        //set the init ship and enemy coors
         shipCoords = coors
         enemyCoords = eCoors
+        //convert enemy coordinates
         enemyCoors()
         
     }
     
+    //update the Coordinates from the ViewController
     func updateCoors(coors: Array<Float>, eCoors: Array<Array<Float>>){
         shipCoords?.removeAll()
         enemyCoords?.removeAll()
@@ -45,20 +47,22 @@ class GameModel{
         enemyCoords = eCoors
     }
     
-    
+    //to be called every frame
     func update() -> results {
+        //convert coordinates to Iphone Coordinates
         enemyCoors()
         shipCoors()
-
+        //the saved results
         var theResults: results = results()
-        
+        //check if the ship hit anything
         theResults.hit = checkShipColl()
+        //check in a bullet hit anything
         theResults.removelist = checkBulletColl()
+        //give results to the view controller
         return theResults
-        
-
     }
     
+    //convert enemy coordinates to Iphone Coordinates
     func enemyCoors(){
         enemyCoordsXY.removeAll()
         var x1: Float = 0.0
@@ -105,11 +109,8 @@ class GameModel{
             
             enemyCoordsXY.append(newArray)
         }
-        
-
-        
     }
-    
+    //convert ship coordinates to Iphone Coordinates
     func shipCoors(){
         shipCoordsXY.removeAll()
         var x1: Float = 0.0
@@ -154,12 +155,14 @@ class GameModel{
         shipCoordsXY.append(y2)
         
     }
-    
+    //check if ship hits anything
     func checkShipColl() -> Array<Int>
     {
+        //if [0] of hitList is 1 the ship hit something in then [1] saves the index of the enemy ship
         var hitList: Array<Int> = Array()
         hitList.append(0)
         var index = 0
+        //check every enemy ship
         for eCoors in enemyCoordsXY
         {
 
@@ -200,11 +203,10 @@ class GameModel{
 
         
     }
-    
+    //check ig the bullt hits anything
     func checkBulletColl() -> Array<Int>
     {
         var indexB = 0
-
         var removeList: Array<Int> = Array()
         removeList.append(0)
         for b in bullets!{
@@ -214,8 +216,11 @@ class GameModel{
                 if(Int(b.frame.origin.y) <= Int(eCoors[2]) && Int(b.frame.origin.y) >= Int(eCoors[3])){
                     if(Int(b.frame.origin.x) >= Int(eCoors[0]) && Int(b.frame.origin.x) <= Int(eCoors[1]))
                     {
+                        //if [0] is 1 then bullet hit somting
                         removeList[0] = 1
+                        //save index of bullet of list
                         removeList.append(indexB)
+                        //save index of ship of it's list
                         removeList.append(indexS)
                         return removeList
                     }
@@ -232,11 +237,12 @@ class GameModel{
         
         return removeList
     }
-    
+    //check if score is part of highscores return true if it is part of the highscore false if otherwise
     func checkScore(score: Int) -> Bool{
         if(score > 0)
         {
             var index = 0
+            //check if score is hight than scoore on the list
             for theScore in highScores{
 
                 if(score > theScore.score){
@@ -247,6 +253,7 @@ class GameModel{
                 }
                 index += 1
             }
+            //if highsocres is less than 10 add it to the end
             if(highScores.count < 10){
                 var scoreElement = highScore()
                 scoreElement.score = score
@@ -260,7 +267,7 @@ class GameModel{
 
 
     }
-    
+    //pass over highscores
     func getHighScores() -> Array<highScore>
     {
         return highScores

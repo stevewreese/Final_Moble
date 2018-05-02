@@ -1,7 +1,7 @@
 //
 //  ViewController.swift
 //  openGLtest
-//
+//  the view controller using the openGL
 //  Created by u0396206 on 4/23/18.
 //  Copyright © 2018 u0396206. All rights reserved.
 //
@@ -10,8 +10,6 @@ import GLKit
 
 class ViewController: GLKViewController, ControlDelegate{
 
-    
-    
     var winstate = GameOver(frame: UIScreen.main.bounds)
     var theGame: GameView = GameView(frame: UIScreen.main.bounds)
     var theHighScore: HighScore = HighScore(frame: UIScreen.main.bounds)
@@ -120,7 +118,7 @@ class ViewController: GLKViewController, ControlDelegate{
         -1.0, -1.1,
         -0.8, -1.0,
         -1.0, -1.0,
-        
+        //background
         1.0, -1.0,
         -1.0, -1.0,
         +1.0, 1.0,
@@ -327,7 +325,6 @@ class ViewController: GLKViewController, ControlDelegate{
     override func glkView(_ view: GLKView, drawIn rect: CGRect) {
         
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT))
-        
         if(!pause)
         {
             if(!stop)
@@ -372,10 +369,10 @@ class ViewController: GLKViewController, ControlDelegate{
                 }
                 
             }
-            
+            //get coordinates
             theControl?.updateCoors(coors: collectCoors, eCoors: enemyCoors)
             
-            
+            //fire every 5 frames
             if(fire){
                 if(whenToFire == 5)
                 {
@@ -388,7 +385,7 @@ class ViewController: GLKViewController, ControlDelegate{
             }
             
             var index = 0
-            
+            //move bullet
             for bullet in bulletList
             {
                 bullet.frame.origin.y = bullet.frame.origin.y - 10
@@ -401,10 +398,9 @@ class ViewController: GLKViewController, ControlDelegate{
             }
             
             theControl?.updateBullet(bulletList: bulletList)
-            
-            
+            //call game loop
             var theResuts : results = (theControl?.update())!
-            
+            //remove bullet adn ships if needed
             if(theResuts.removelist[0] == 1)
             {
                 bulletList[theResuts.removelist[1]].removeFromSuperview()
@@ -413,13 +409,14 @@ class ViewController: GLKViewController, ControlDelegate{
                 score += 25
                 theGame.setScore(score: score)
             }
-            
+            //if ship hit take damage
             if(theResuts.hit[0] == 1){
                 enemyHit(index: theResuts.hit[1])
                 lifeBar -= damage
             }
             if(lifeBar >= 0)
             {
+                //life bar
                 gameProgGreen?.removeFromSuperview()
                 gameProgGreen = UIView(frame: CGRect(x: 200, y: 50, width: lifeBar * 2, height: 5))
                 gameProgGreen?.backgroundColor = .green
@@ -427,6 +424,7 @@ class ViewController: GLKViewController, ControlDelegate{
 
             }
             else{
+                //if less than zero game over
                 gameProgGreen?.removeFromSuperview()
                 gameProgGreen = UIView(frame: CGRect(x: 200, y: 50, width: 0, height: 5))
                 gameProgGreen?.backgroundColor = .green
@@ -435,7 +433,7 @@ class ViewController: GLKViewController, ControlDelegate{
                 collectCoors[0] = 3
                 collectCoors[1] = 3
 
-                //winstate.isUserInteractionEnabled = true
+                //check highscores
                 theGame.removeFromSuperview()
                 if(theControl?.checkScore(score: score))!
                 {
@@ -451,15 +449,14 @@ class ViewController: GLKViewController, ControlDelegate{
                 theMainMenu.greyOut()
             }
  
-            
+            //update coordinaes of bullets
             theControl?.updateBullet(bulletList: bulletList)
             
+            //move enemies
             count += 1
             
             var enIndex = 0
-            
-            
-            
+
             if(count >= timing[enIndex] && enemyInPlay[enIndex])
             {
             
@@ -575,7 +572,7 @@ class ViewController: GLKViewController, ControlDelegate{
                 }
             }
             
-       
+            //see if game is won
             if(checkWinState()){
                 
                 if(theLevel == level.one)
