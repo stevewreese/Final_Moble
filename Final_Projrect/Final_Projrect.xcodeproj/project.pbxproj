@@ -20,7 +20,6 @@
 		9A7E0F2A2076EF24002EC2C8 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E0F292076EF24002EC2C8 /* GameModel.swift */; };
 		9A7E0F2C2076EF5E002EC2C8 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E0F2B2076EF5E002EC2C8 /* MainMenu.swift */; };
 		9A7E0F2E2076EF70002EC2C8 /* HighScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E0F2D2076EF70002EC2C8 /* HighScore.swift */; };
-		9AD59AAC20796F710005BEF4 /* playerShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD59AAB20796F710005BEF4 /* playerShip.swift */; };
 		9AD6E7DF208FFEDD006FC075 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AD6E7DE208FFEDD006FC075 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +39,6 @@
 		9A7E0F292076EF24002EC2C8 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		9A7E0F2B2076EF5E002EC2C8 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		9A7E0F2D2076EF70002EC2C8 /* HighScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScore.swift; sourceTree = "<group>"; };
-		9AD59AAB20796F710005BEF4 /* playerShip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = playerShip.swift; sourceTree = "<group>"; };
 		9AD6E7DE208FFEDD006FC075 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../../openGLtest/openGLtest/ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,7 +80,6 @@
 				9A7E0F292076EF24002EC2C8 /* GameModel.swift */,
 				9A7E0F2B2076EF5E002EC2C8 /* MainMenu.swift */,
 				9A7E0F2D2076EF70002EC2C8 /* HighScore.swift */,
-				9AD59AAB20796F710005BEF4 /* playerShip.swift */,
 				9AD6E7DE208FFEDD006FC075 /* ViewController.swift */,
 				9A317B12209921F10064FAF3 /* eShip.png */,
 				9A3E2D302098F180004FB0C1 /* level3.png */,
@@ -174,7 +171,6 @@
 				9A7E0F2C2076EF5E002EC2C8 /* MainMenu.swift in Sources */,
 				9A3E2D332098F73F004FB0C1 /* GameOver.swift in Sources */,
 				9AD6E7DF208FFEDD006FC075 /* ViewController.swift in Sources */,
-				9AD59AAC20796F710005BEF4 /* playerShip.swift in Sources */,
 				9A7E0F262076EE75002EC2C8 /* GameController.swift in Sources */,
 				9A7E0F282076EE83002EC2C8 /* GameView.swift in Sources */,
 				9A7E0F122076E944002EC2C8 /* AppDelegate.swift in Sources */,
